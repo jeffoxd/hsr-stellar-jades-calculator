@@ -5,7 +5,7 @@
   },
   {
     "title": "Tech stack?",
-    "content": "Using [React](https://react.dev/) via [Next js](https://nextjs.org/) on [Typescript](https://www.typescriptlang.org/), big help from [shadcn/ui](https://ui.shadcn.com/)!"
+    "content": "Using [React](https://react.dev/) via [Vite](https://vite.dev/) on [Typescript](https://www.typescriptlang.org/), big help from [shadcn/ui](https://ui.shadcn.com/)!"
   },
   {
     "title": "Have an issue?",

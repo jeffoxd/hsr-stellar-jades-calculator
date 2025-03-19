@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { AppCard } from "@/components/AppCard";
 import { Themes, ThemeProvider } from "@/components/ThemeProvider";
 
-export default function Home() {
+export default function App() {
   const initialTheme =
     (global?.window?.localStorage?.getItem("current_theme") as Themes) ||
     "stellar-jades";
@@ -19,12 +19,14 @@ export default function Home() {
   }, [theme]);
 
   return (
-    <ThemeProvider theme={theme} setTheme={setTheme}>
-      <main>
-        <div className="flex flex-col py-16 items-center justify-center">
-          <AppCard />
-        </div>
-      </main>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme} setTheme={setTheme}>
+        <main>
+          <div className="flex flex-col py-16 items-center justify-center">
+            <AppCard />
+          </div>
+        </main>
+      </ThemeProvider>
+    </>
   );
 }

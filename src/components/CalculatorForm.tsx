@@ -159,7 +159,7 @@ export function CalculatorForm({
           </div>
           <div>
             <Label>Paid stuffs</Label>
-            <div className="border rounded-xl p-4 pt-2 shadow-sm">
+            <div className="border rounded-xl p-4 pt-2 shadow-xs">
               <FormField
                 control={form.control}
                 name="expressSupplyPass"
@@ -230,7 +230,7 @@ export function CalculatorForm({
               </div>
             </div>
           </div>
-          <div className="border rounded-xl shadow-sm">
+          <div className="border rounded-xl shadow-xs">
             <FormField
               control={form.control}
               name="pointRewards"
@@ -301,7 +301,7 @@ export function CalculatorForm({
           />
           <div className="flex flex-col items-center justify-center gap-y-2">
             <Label>Endgame content (enter expected star target)</Label>
-            <div className="grid grid-cols-1 md:grid-cols-3 border rounded-lg shadow-sm">
+            <div className="grid grid-cols-1 md:grid-cols-3 border rounded-lg shadow-xs">
               <FormField
                 control={form.control}
                 name="memoryOfChaosStars"
@@ -417,7 +417,7 @@ export function CalculatorForm({
                 claimed rewards, bug compensation, HoYoLab check-in, and more)
               </SimpleTooltip>
             </div>
-            <ScrollArea className="h-64 w-[22rem] md:w-[30rem] border rounded-lg shadow-sm p-4">
+            <ScrollArea className="h-64 w-[22rem] md:w-[30rem] border rounded-lg shadow-xs p-4">
               <div className="flex flex-col items-center justify-center gap-4 mx-2">
                 <ul className="w-full space-y-2 md:space-y-4">
                   <li className="min-w-full grid grid-cols-[1fr_0.25fr_0.25fr_0.25fr] gap-2 md:gap-4 text-center">

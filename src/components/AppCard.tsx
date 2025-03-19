@@ -96,7 +96,7 @@ export function AppCard() {
       passes: "-",
     },
     {
-      stepName: "Apocalyptic shadow",
+      stepName: "Apocalyptic shadow-sm",
       jades:
         calculatorResults?.calculationSteps.stellarJades
           .apocalypticShadowStarsJades,
@@ -246,8 +246,8 @@ export function AppCard() {
                         </TableHeader>
                         <TableBody>
                           {calculationStepsTableRows.map(
-                            ({ stepName, jades, passes }) => (
-                              <TableRow>
+                            ({ stepName, jades, passes }, i) => (
+                              <TableRow key={i}>
                                 <TableCell>{stepName}</TableCell>
                                 <TableCell>{jades}</TableCell>
                                 <TableCell>{passes}</TableCell>
@@ -289,8 +289,8 @@ export function AppCard() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {rewardTableRows.map(({ rewardName, amountText }) => (
-                        <TableRow>
+                      {rewardTableRows.map(({ rewardName, amountText }, i) => (
+                        <TableRow key={i}>
                           <TableCell>{rewardName}</TableCell>
                           <TableCell>{amountText}</TableCell>
                         </TableRow>
