@@ -28,6 +28,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ${{ vars.YOUR_DIST_FOLDER }} --project-name=hsr-stellar-jades-calculator
+          command: pages deploy ./dist --project-name=hsr-stellar-jades-calculator
         env:
-          SKIP_DEPENDENCY_INSTALL: ${{ vars.SKIP_DEPENDENCY_INSTALL }}
+          SKIP_DEPENDENCY_INSTALL: 1
