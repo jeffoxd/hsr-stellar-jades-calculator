@@ -1,18 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HSR Stellar Jades Calculator
 
-## Getting Started
+Lower bound estimation of stellar jades and limited passes from today to end date.
 
-First, run the development server:
+Built using [React](https://react.dev/) via [Next js](https://nextjs.org/) on [Typescript](https://www.typescriptlang.org/), big help from [shadcn/ui](https://ui.shadcn.com/)!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+
+- Several configurations for all known sources of stellar jades and limited passes
+- Customisable dynamic unlimited section to add all extra sources of jades and passes, mainly for events, gifts/redeemable code, compensation etc. And to be more future proof when website stops being maintained
+- Many themes (because why not?)
+- Mobile-friendly
+
+## Rewards amount
+
+Wondering about the jades/passes reward table? Check [constants.ts](/src/lib/constants.ts), it's pretty self-explanatory.
+
+## Running locally
+
+First, run the development server with the command `npm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -20,17 +25,28 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Tests
 
-To learn more about Next.js, take a look at the following resources:
+Run tests by `npm test`, unit tests are only for the brunt of the calculating functions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Issues and suggestions are always welcome in Github issues.
 
-## Deploy on Vercel
+Currently not open to contributors.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Coding notice
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+British English is preferred.
+
+[Conventional commits](https://www.conventionalcommits.org/) is used to standardise commits.
+
+## Why Next.js
+
+Ah yes, perhaps you realised I'm using Nextjs for an exclusively SPA project, it was a mistake I made at the start and wasn't worth the effort to change it to something else... yet. Maybe in the future~
+
+## License
+
+GNU General Public License v3.0 or later
+
+See [COPYING](COPYING) to see the full text.

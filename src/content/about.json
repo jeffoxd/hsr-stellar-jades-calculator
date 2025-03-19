@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Why make this?",
+    "content": "Portfolio for my resume and because I got to sharpen my skills hehe~"
+  },
+  {
+    "title": "Tech stack?",
+    "content": "Using [React](https://react.dev/) via [Next js](https://nextjs.org/) on [Typescript](https://www.typescriptlang.org/), big help from [shadcn/ui](https://ui.shadcn.com/)!"
+  },
+  {
+    "title": "Have an issue?",
+    "content": "or contact me via [email](mailto:jeffoxd50@gmail.com)."
+  },
+  {
+    "title": "Who are you?",
+    "content": "My name is Jeff."
+  },
+  {
+    "title": "Credits",
+    "content": "Inspired by this [HSR Free Stellar Jade Calculator](https://hsr-gem-calculator.netlify.app/), but unlike them who lists every event and updates whenever a new event is up, I would like to protect my sanity, respect though."
+  },
+  {
+    "title": "Recommendations",
+    "content": "This [Gacha rate calculator](https://hutaobot.moe/tools/gachacalc) is pretty good for knowing how much probability of getting a character or weapon. And this [Warp tracker](https://starrailstation.com/en/warp#char_event) is useful for tracking your pulls."
+  },
+  {
+    "title": "Fun facts",
+    "content": "* The March Hunt theme background is the combination of Yanqing's and Yunli's color, there's also Immortal Delight's (boba tea she drinks) color!\n * I love March 7th~"
+  },
+  {
+    "title": "NOTICE",
+    "content": "*This calculator is only an estimation tool (towards lower bound) and may not be 100% accurate (though I'm open to any suggestions of making it more accurate). I am not liable for any miscalculations, poor decisions, nor mishaps you make on this gacha game. Gamble responsibly. ~~ALL OR NOTHING!!!~~*"
+  }
+]
