@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install Wrangler
+        run: npm i wrangler@3.90.0 --legacy-peer-deps
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
