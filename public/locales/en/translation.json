@@ -1,0 +1,107 @@
+{
+  "common": {
+    "about": "About",
+    "back": "Back",
+    "add": "Add"
+  },
+  "hsr_terms": {
+    "dailies": "Dailies",
+    "express_supply": "Express supply",
+    "weekly_point_rewards": "Weekly point rewards",
+    "monthly_ember_exchange": "Monthly ember exchange",
+    "memory_of_chaos": "Memory of Chaos",
+    "pure_fiction": "Pure Fiction",
+    "apocalyptic_shadow": "Apocalyptic Shadow",
+    "battle_pass": "Battle pass",
+    "nameless_glory": "Nameless Glory",
+    "nameless_medal": "Nameless Medal",
+    "additional_sources": "Additional sources",
+    "amount_jades": "{{amount}} jades",
+    "amount_passes": "{{amount}} limited passes",
+    "amount_jades_passes": "{{jadesAmount}} jades, {{passesAmount}} limited passes",
+    "amount_pulls": "{{amount}} pulls"
+  },
+  "calculation_terms": {
+    "starting": "Starting",
+    "final_total": "Final total"
+  },
+  "app_card": {
+    "card_title": "HSR Stellar Jades Calculator",
+    "card_description": "Configure your jade/pass sources",
+    "about_title": "About",
+    "about_alert_title": "Heads up!",
+    "about_alert_description": "Section below is written fully in English, sorry for the inconvenience~",
+    "reward_table": {
+      "title": "Reward table",
+      "rewards_column": "Rewards",
+      "amount_column": "Amount (each instance)",
+      "weekly_point_rewards_extra": "(Equilibrium level 0-6)",
+      "endgame_rewards": "Endgame rewards (stars from least to most, currently all the same)"
+    },
+    "calculation_steps": {
+      "title": "Calculation steps",
+      "step_column": "Step name",
+      "jades_column": "Jades",
+      "passes_column": "Limited passes"
+    },
+    "results": {
+      "title": "Estimated results",
+      "stellar_jades": "Stellar jades amount gained: {{gained}}, total stellar jades: {{total}}",
+      "limited_passes": "Limited passes amount gained: {{gained}}, total limited passes: {{total}}",
+      "number_of_pulls": "<bold>Number of pulls:</bold> ({{stellarJadesTotal}} jades ÷ {{stellarJadesPerPull}} jades/pull = {{jadesPulls}} pulls from jades) + {{limitedPassesTotal}} limited passes = <bold>{{pullsTotal}}</bold>"
+    },
+    "assumptions": "Assumptions",
+    "assumption_array": [
+      "Dailies are fully claimed every day, it will be counted assuming you've claimed today's",
+      "Simulated/Divergent Universe Points Rewards is fully claimed every Monday",
+      "Battle pass is reset every patch, which is usually 42 days",
+      "Battle pass passes are all claimed (why would you buy if you can't get them all?)",
+      "Endgame content (MOC, PF, AS) resets every 42 days, following their respective schedules",
+      "Endgame content is cleared ASAP, and the current endgame content event is counted as done. Meaning let's say the period you are calculating has 4 MoC occurrences, it will only count the rewards from those 3 and not the current happening one",
+      "Passes from Embers Exchange reset 1st of every month, and all 5 is bought every month"
+    ],
+    "copyright_footer": "© All rights reserved. References game by HoYoverse/miHoYo. Other properties belong to their respective owners."
+  },
+  "calculator_form": {
+    "submit": "Calculate!",
+    "label": {
+      "starting_stellar_jades": "Current stellar jades",
+      "starting_limited_passes": "Current limited passes",
+      "paid_stuffs": "Paid stuffs",
+      "express_supply_pass": "Express supply pass",
+      "battle_pass": "Battle pass",
+      "battle_pass_type": "Battle pass type",
+      "point_rewards": "Weekly point rewards",
+      "point_rewards_equilibrium": "Equilibrium level",
+      "embers_exchange_five_passes": "Buy 5 passes from Embers Exchange monthly",
+      "endgame_content": "Endgame content (enter expected star target)",
+      "memory_of_chaos_stars": "Memory of Chaos stars",
+      "pure_fiction_stars": "Pure Fiction stars",
+      "apocalyptic_shadow_stars": "Apocalyptic Shadow stars",
+      "additional_sources": "Additional sources",
+      "additional_sources_name": "Name",
+      "additional_sources_jades": "Jades",
+      "additional_sources_passes": "Passes",
+      "end_date": "End date for calculations"
+    },
+    "select": {
+      "point_rewards_equilibrium": "Equilibrium {{level}}",
+      "star_amount": "{{amount}} stars"
+    },
+    "placeholder": {
+      "battle_pass_type": "Select a battle pass type",
+      "point_rewards_equilibrium": "Select a equilibrium level",
+      "endgame_star_select": "Select a star target",
+      "additional_sources_name": "name for you to remember~",
+      "end_date": "Pick a date"
+    },
+    "tooltip": {
+      "express_supply_pass": "Gives {{amount}} jades daily",
+      "battle_pass_type": "Nameless Glory gives {{namelessGloryJades}} jades; Nameless Medal gives {{namelessMedalJades}} jades. Both give {{limitedPass}} limited pass",
+      "point_rewards": "From Simulated/Divergent Universe (Equilibrium level affects amount given)",
+      "embers_exchange_five_passes": "Assuming 5 exchanged every 1st of month when it refreshes (excluding this month)",
+      "additional_sources": "Allows you to add any jade/pass sources custom-ly (like events, code redemption, compensations, HoYoLAB check-in, and more)",
+      "end_date": "Treat as exclusive, as today isn't counted"
+    }
+  }
+}

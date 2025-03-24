@@ -1,0 +1,107 @@
+{
+  "common": {
+    "about": "关于",
+    "back": "后退",
+    "add": "添加"
+  },
+  "hsr_terms": {
+    "dailies": "每日实训",
+    "express_supply": "列车补给",
+    "weekly_point_rewards": "每周积分奖励",
+    "monthly_ember_exchange": "每月星芒兑换",
+    "memory_of_chaos": "忘却之庭",
+    "pure_fiction": "虚构叙事",
+    "apocalyptic_shadow": "末日幻影",
+    "battle_pass": "战斗通行证",
+    "nameless_glory": "无名客的荣勋",
+    "nameless_medal": "无名客的奖章",
+    "additional_sources": "额外收入",
+    "amount_jades": "{{amount}} 星琼",
+    "amount_passes": "{{amount}} 星轨专票",
+    "amount_jades_passes": "{{jadesAmount}} 星琼, {{passesAmount}} 星轨专票",
+    "amount_pulls": "{{amount}} 抽"
+  },
+  "calculation_terms": {
+    "starting": "起始",
+    "final_total": "最终总数"
+  },
+  "app_card": {
+    "card_title": "崩坏：星穹铁道 星琼计算机",
+    "card_description": "配置您的星琼/星轨专票来源",
+    "about_title": "关于",
+    "about_alert_title": "注意！",
+    "about_alert_description": "以下部分仅以英文撰写，敬请谅解~",
+    "reward_table": {
+      "title": "奖励表",
+      "rewards_column": "奖励",
+      "amount_column": "数量（每实例）",
+      "weekly_point_rewards_extra": "(均衡等级 0-6)",
+      "endgame_rewards": "终极内容奖励 (星数顺序, 目前奖励都一样)"
+    },
+    "calculation_steps": {
+      "title": "计算步骤",
+      "step_column": "步骤",
+      "jades_column": "星琼",
+      "passes_column": "星轨专票"
+    },
+    "results": {
+      "title": "预算",
+      "stellar_jades": "获得星琼：{{gained}}，总星琼：{{total}}",
+      "limited_passes": "获得星轨专票：{{gained}}，总星轨专票：{{total}}",
+      "number_of_pulls": "<bold>总抽：</bold> ({{stellarJadesTotal}} 星琼 ÷ {{stellarJadesPerPull}} 星琼/抽 = {{jadesPulls}} 星琼抽数) + {{limitedPassesTotal}} 星轨专票= <bold>{{pullsTotal}}</bold>"
+    },
+    "assumptions": "假定",
+    "assumption_array": [
+      "每日实训每天都领取，计算机会认为本日的已领取",
+      "模拟/差分宇宙的积分奖励每星期一全都领取",
+      "战斗通行证每个版本刷新，通常每42天",
+      "战斗通行证给予的星轨专票全都领取 (为何付费如果不完全领取？)",
+      "终极内容 (忘却，虚构，末日) 每42天刷新, 跟随各自的计划表",
+      "终极内容尽快完成, 已完成现有的终极内容。意思说如果计算期间忘却之庭发生了四次，它只会计算三次的奖励而不是现有的",
+      "从星芒兑换的星轨专票每月一日刷新，然后全五张都兑换"
+    ],
+    "copyright_footer": "© 保留所有权利。HoYoverse/米哈游版权所有。其他财产属于其各自所有者。"
+  },
+  "calculator_form": {
+    "submit": "算吧!",
+    "label": {
+      "starting_stellar_jades": "现有星琼",
+      "starting_limited_passes": "现有星轨专票",
+      "paid_stuffs": "付费的",
+      "express_supply_pass": "列车补给凭证",
+      "battle_pass": "战斗通行证",
+      "battle_pass_type": "战斗通行证种类",
+      "point_rewards": "每周积分奖励",
+      "point_rewards_equilibrium": "均衡等级",
+      "embers_exchange_five_passes": "每月从星芒兑换买五张星轨专票 ",
+      "endgame_content": "终极内容 (输入星数目标)",
+      "memory_of_chaos_stars": "忘却之庭星数",
+      "pure_fiction_stars": "虚构叙事星数",
+      "apocalyptic_shadow_stars": "末日幻影星数",
+      "additional_sources": "额外收入",
+      "additional_sources_name": "名称",
+      "additional_sources_jades": "星琼",
+      "additional_sources_passes": "星轨专票",
+      "end_date": "结算日期"
+    },
+    "select": {
+      "point_rewards_equilibrium": "均衡等级 {{level}}",
+      "star_amount": "{{amount}} 星数"
+    },
+    "placeholder": {
+      "battle_pass_type": "选择战斗通行证种类",
+      "point_rewards_equilibrium": "选择均衡等级",
+      "endgame_star_select": "选择星数目标",
+      "additional_sources_name": "给您记录~",
+      "end_date": "选择日期"
+    },
+    "tooltip": {
+      "express_supply_pass": "每天给予 {{amount}} 星琼",
+      "battle_pass_type": "无名客的荣勋给予 {{namelessGloryJades}} 星琼; 无名客的奖章给予 {{namelessMedalJades}} 星琼. 各都给予 {{limitedPass}} 星轨专票",
+      "point_rewards": "来自模拟/差分宇宙 (均衡等级会影响奖励数量)",
+      "embers_exchange_five_passes": "假定每月一日刷新时领取全五张 （除了本月）",
+      "additional_sources": "让您添加任何额外星琼和星轨专票的收入（例如活动，兑换码，补偿，HoYoLAB签到等等）",
+      "end_date": "可以把这个日期当成被排除，不包括今日"
+    }
+  }
+}

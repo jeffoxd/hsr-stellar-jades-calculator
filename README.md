@@ -9,6 +9,7 @@ Built using [React](https://react.dev/) via [Vite](https://vite.dev/) on [Typesc
 - Several configurations for all known sources of stellar jades and limited passes
 - Customisable dynamic unlimited section to add all extra sources of jades and passes, mainly for events, gifts/redeemable code, compensation etc. And to be more future proof when website stops being maintained
 - Many themes (because why not?)
+- Localisation
 - Mobile-friendly
 
 ## Rewards amount
@@ -29,7 +30,7 @@ Run tests by `npm test`, unit tests are only for the brunt of the calculating fu
 
 ## Contributing
 
-Issues and suggestions are always welcome in Github issues.
+Issues and suggestions are always welcome in Github Issues.
 
 Currently not open to contributors.
 
@@ -38,6 +39,16 @@ Currently not open to contributors.
 British English is preferred.
 
 [Conventional commits](https://www.conventionalcommits.org/) is used to standardise commits.
+
+## Credits
+
+Inspired by this [HSR Free Stellar Jade Calculator](https://github.com/Kronman590/hsr-gem-calculator)
+
+#### Translations
+
+- English (`en`): [@jeffoxd](https://github.com/jeffoxd)
+- Simplified Chinese (`zh-Hans`): [@jeffoxd](https://github.com/jeffoxd)
+- Traditional Chinese (`zh-Hant`): [@jeffoxd](https://github.com/jeffoxd)
 
 ## License
 

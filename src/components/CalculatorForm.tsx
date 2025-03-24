@@ -5,6 +5,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 import { format, addDays } from "date-fns";
 import { CalendarRange, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SimpleTooltip from "@/components/SimpleTooltip";
-import { STELLAR_JADE_AMOUNTS, LIMITED_PASS_AMOUNTS } from "@/lib/constants";
+import {
+  STELLAR_JADE_AMOUNTS,
+  LIMITED_PASS_AMOUNTS,
+  EQUILIBRIUM_LEVELS,
+  ENDGAME_STAR_STEPS,
+} from "@/lib/constants";
 import { Label } from "@/components/ui/label";
 import {
   Popover,
@@ -40,54 +46,57 @@ import {
   parseConfigurations,
   CalculateResultsReturnType,
 } from "@/lib/calculate";
-
-const formSchema = z.object({
-  startingStellarJades: z.coerce.number().nonnegative({
-    message: "Can't be negative",
-  }),
-  startingLimitedPasses: z.coerce.number().nonnegative({
-    message: "Can't be negative",
-  }),
-  expressSupplyPass: z.boolean(),
-  paidBattlePass: z.boolean(),
-  battlePassType: z.string({
-    required_error: "Please select a battle pass type",
-  }),
-  pointRewards: z.boolean(),
-  pointRewardsEquilibrium: z.string({
-    required_error: "Please select a point rewards Equilibrium Level",
-  }),
-  embersExchangeFivePasses: z.boolean(),
-  memoryOfChaosStars: z.string({
-    required_error: "Please select a MoC star target",
-  }),
-  pureFictionStars: z.string({
-    required_error: "Please select a PF star target",
-  }),
-  apocalypticShadowStars: z.string({
-    required_error: "Please select a AS star target",
-  }),
-  additionalSources: z.array(
-    z.object({
-      name: z.string().trim(),
-      jades: z.coerce.number().nonnegative({
-        message: "Can't be negative",
-      }),
-      passes: z.coerce.number().nonnegative({
-        message: "Can't be negative",
-      }),
-    })
-  ),
-  endDate: z.date({
-    required_error: "An end date is required.",
-  }),
-});
+import { getDateFnLocales } from "@/lib/locale";
 
 export function CalculatorForm({
   onResult,
 }: {
   onResult: (results: CalculateResultsReturnType) => void;
 }) {
+  const { i18n, t } = useTranslation();
+
+  const formSchema = z.object({
+    startingStellarJades: z.coerce.number().nonnegative({
+      message: "Can't be negative",
+    }),
+    startingLimitedPasses: z.coerce.number().nonnegative({
+      message: "Can't be negative",
+    }),
+    expressSupplyPass: z.boolean(),
+    paidBattlePass: z.boolean(),
+    battlePassType: z.string({
+      required_error: "Please select a battle pass type",
+    }),
+    pointRewards: z.boolean(),
+    pointRewardsEquilibrium: z.string({
+      required_error: "Please select a point rewards Equilibrium Level",
+    }),
+    embersExchangeFivePasses: z.boolean(),
+    memoryOfChaosStars: z.string({
+      required_error: "Please select a MoC star target",
+    }),
+    pureFictionStars: z.string({
+      required_error: "Please select a PF star target",
+    }),
+    apocalypticShadowStars: z.string({
+      required_error: "Please select a AS star target",
+    }),
+    additionalSources: z.array(
+      z.object({
+        name: z.string().trim(),
+        jades: z.coerce.number().nonnegative({
+          message: "Can't be negative",
+        }),
+        passes: z.coerce.number().nonnegative({
+          message: "Can't be negative",
+        }),
+      })
+    ),
+    endDate: z.date({
+      required_error: "An end date is required.",
+    }),
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -135,7 +144,9 @@ export function CalculatorForm({
               name="startingStellarJades"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Current stellar jades</FormLabel>
+                  <FormLabel>
+                    {t("calculator_form.label.starting_stellar_jades")}
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="0" {...field} />
                   </FormControl>
@@ -148,7 +159,9 @@ export function CalculatorForm({
               name="startingLimitedPasses"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Current limited passes</FormLabel>
+                  <FormLabel>
+                    {t("calculator_form.label.starting_limited_passes")}
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="0" {...field} />
                   </FormControl>
@@ -158,7 +171,7 @@ export function CalculatorForm({
             />
           </div>
           <div>
-            <Label>Paid stuffs</Label>
+            <Label>{t("calculator_form.label.paid_stuffs")}</Label>
             <div className="border rounded-xl p-4 pt-2 shadow-xs">
               <FormField
                 control={form.control}
@@ -166,9 +179,13 @@ export function CalculatorForm({
                 render={({ field }) => (
                   <FormItem className="flex flex-row items-start space-x-2 space-y-0 p-4">
                     <FormLabel>
-                      <p className="float-left pr-1">Express supply pass</p>
+                      <p className="float-left pr-1">
+                        {t("calculator_form.label.express_supply_pass")}
+                      </p>
                       <SimpleTooltip>
-                        {`Gives ${STELLAR_JADE_AMOUNTS.expressSupplyPassDaily} jades daily`}
+                        {t("calculator_form.tooltip.express_supply_pass", {
+                          amount: STELLAR_JADE_AMOUNTS.expressSupplyPassDaily,
+                        })}
                       </SimpleTooltip>
                     </FormLabel>
                     <FormControl>
@@ -187,7 +204,9 @@ export function CalculatorForm({
                   name="paidBattlePass"
                   render={({ field }) => (
                     <FormItem className="flex items-start space-x-2 space-y-0 p-4">
-                      <FormLabel>Battle pass</FormLabel>
+                      <FormLabel>
+                        {t("calculator_form.label.battle_pass")}
+                      </FormLabel>
                       <FormControl>
                         <Checkbox
                           checked={field.value}
@@ -204,9 +223,17 @@ export function CalculatorForm({
                   render={({ field }) => (
                     <FormItem className="flex items-start space-x-2 space-y-0 p-4">
                       <FormLabel className="flex">
-                        <p className="float-left flex-1">Battle pass type</p>
+                        <p className="float-left flex-1">
+                          {t("calculator_form.label.battle_pass_type")}
+                        </p>
                         <SimpleTooltip>
-                          {`Nameless Glory gives ${STELLAR_JADE_AMOUNTS.namelessGlory} jades; Nameless Medal gives ${STELLAR_JADE_AMOUNTS.namelessMedal} jades. Both give ${LIMITED_PASS_AMOUNTS.namelessGlory} limited pass`}
+                          {t("calculator_form.tooltip.battle_pass_type", {
+                            namelessGloryJades:
+                              STELLAR_JADE_AMOUNTS.namelessGlory,
+                            namelessMedalJades:
+                              STELLAR_JADE_AMOUNTS.namelessMedal,
+                            limitedPass: LIMITED_PASS_AMOUNTS.namelessGlory,
+                          })}
                         </SimpleTooltip>
                       </FormLabel>
                       <Select
@@ -215,12 +242,20 @@ export function CalculatorForm({
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select a battle pass type" />
+                            <SelectValue
+                              placeholder={t(
+                                "calculator_form.placeholder.battle_pass_type"
+                              )}
+                            />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="0">Nameless Glory</SelectItem>
-                          <SelectItem value="1">Nameless Medal</SelectItem>
+                          <SelectItem value="0">
+                            {t("hsr_terms.nameless_glory")}
+                          </SelectItem>
+                          <SelectItem value="1">
+                            {t("hsr_terms.nameless_medal")}
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -237,10 +272,11 @@ export function CalculatorForm({
               render={({ field }) => (
                 <FormItem className="flex items-start space-x-2 space-y-0 p-4">
                   <FormLabel>
-                    <p className="float-left pr-1">Weekly point rewards</p>
+                    <p className="float-left pr-1">
+                      {t("calculator_form.label.point_rewards")}
+                    </p>
                     <SimpleTooltip>
-                      From Simulated/Divergent Universe (Equilibrium level
-                      affects amount given)
+                      {t("calculator_form.tooltip.point_rewards")}
                     </SimpleTooltip>
                   </FormLabel>
                   <FormControl>
@@ -258,24 +294,31 @@ export function CalculatorForm({
               name="pointRewardsEquilibrium"
               render={({ field }) => (
                 <FormItem className="flex items-start space-x-2 space-y-0 p-4">
-                  <FormLabel>Equilibrium level</FormLabel>
+                  <FormLabel>
+                    {t("calculator_form.label.point_rewards_equilibrium")}
+                  </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a equilibrium level" />
+                        <SelectValue
+                          placeholder={t(
+                            "calculator_form.placeholder.point_rewards_equilibrium"
+                          )}
+                        />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="0">Equilibrium 0</SelectItem>
-                      <SelectItem value="1">Equilibrium 1</SelectItem>
-                      <SelectItem value="2">Equilibrium 2</SelectItem>
-                      <SelectItem value="3">Equilibrium 3</SelectItem>
-                      <SelectItem value="4">Equilibrium 4</SelectItem>
-                      <SelectItem value="5">Equilibrium 5</SelectItem>
-                      <SelectItem value="6">Equilibrium 6</SelectItem>
+                      {[...Array(EQUILIBRIUM_LEVELS)].map((_, i) => (
+                        <SelectItem value={i.toString()} key={i}>
+                          {t(
+                            "calculator_form.select.point_rewards_equilibrium",
+                            { level: i }
+                          )}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -288,7 +331,14 @@ export function CalculatorForm({
             name="embersExchangeFivePasses"
             render={({ field }) => (
               <FormItem className="flex items-start space-x-2 space-y-0">
-                <FormLabel>Buy 5 passes from Embers Exchange monthly</FormLabel>
+                <FormLabel>
+                  <p className="float-left pr-1">
+                    {t("calculator_form.label.embers_exchange_five_passes")}
+                  </p>
+                  <SimpleTooltip>
+                    {t("calculator_form.tooltip.embers_exchange_five_passes")}
+                  </SimpleTooltip>
+                </FormLabel>
                 <FormControl>
                   <Checkbox
                     checked={field.value}
@@ -300,37 +350,37 @@ export function CalculatorForm({
             )}
           />
           <div className="flex flex-col items-center justify-center gap-y-2">
-            <Label>Endgame content (enter expected star target)</Label>
+            <Label>{t("calculator_form.label.endgame_content")}</Label>
             <div className="grid grid-cols-1 md:grid-cols-3 border rounded-lg shadow-xs">
               <FormField
                 control={form.control}
                 name="memoryOfChaosStars"
                 render={({ field }) => (
                   <FormItem className="flex items-start space-x-2 space-y-0 p-4">
-                    <FormLabel>Memory of Chaos stars</FormLabel>
+                    <FormLabel>
+                      {t("calculator_form.label.memory_of_chaos_stars")}
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a star target" />
+                          <SelectValue
+                            placeholder={t(
+                              "calculator_form.placeholder.endgame_star_select"
+                            )}
+                          />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="0">0 stars</SelectItem>
-                        <SelectItem value="1">3 stars</SelectItem>
-                        <SelectItem value="2">6 stars</SelectItem>
-                        <SelectItem value="3">9 stars</SelectItem>
-                        <SelectItem value="4">12 stars</SelectItem>
-                        <SelectItem value="5">15 stars</SelectItem>
-                        <SelectItem value="6">18 stars</SelectItem>
-                        <SelectItem value="7">21 stars</SelectItem>
-                        <SelectItem value="8">24 stars</SelectItem>
-                        <SelectItem value="9">27 stars</SelectItem>
-                        <SelectItem value="10">30 stars</SelectItem>
-                        <SelectItem value="11">33 stars</SelectItem>
-                        <SelectItem value="12">36 stars</SelectItem>
+                        {ENDGAME_STAR_STEPS.memoryOfChaos.map((e, i) => (
+                          <SelectItem value={i.toString()} key={i}>
+                            {t("calculator_form.select.star_amount", {
+                              amount: e,
+                            })}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -342,30 +392,30 @@ export function CalculatorForm({
                 name="pureFictionStars"
                 render={({ field }) => (
                   <FormItem className="flex items-start space-x-2 space-y-0 p-4">
-                    <FormLabel>Pure Fiction stars</FormLabel>
+                    <FormLabel>
+                      {t("calculator_form.label.pure_fiction_stars")}
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a star target" />
+                          <SelectValue
+                            placeholder={t(
+                              "calculator_form.placeholder.endgame_star_select"
+                            )}
+                          />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="0">0 stars</SelectItem>
-                        <SelectItem value="1">1 stars</SelectItem>
-                        <SelectItem value="2">2 stars</SelectItem>
-                        <SelectItem value="3">3 stars</SelectItem>
-                        <SelectItem value="4">4 stars</SelectItem>
-                        <SelectItem value="5">5 stars</SelectItem>
-                        <SelectItem value="6">6 stars</SelectItem>
-                        <SelectItem value="7">7 stars</SelectItem>
-                        <SelectItem value="8">8 stars</SelectItem>
-                        <SelectItem value="9">9 stars</SelectItem>
-                        <SelectItem value="10">10 stars</SelectItem>
-                        <SelectItem value="11">11 stars</SelectItem>
-                        <SelectItem value="12">12 stars</SelectItem>
+                        {ENDGAME_STAR_STEPS.pureFiction.map((e, i) => (
+                          <SelectItem value={i.toString()} key={i}>
+                            {t("calculator_form.select.star_amount", {
+                              amount: e,
+                            })}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -377,30 +427,30 @@ export function CalculatorForm({
                 name="apocalypticShadowStars"
                 render={({ field }) => (
                   <FormItem className="flex items-start space-x-2 space-y-0 p-4">
-                    <FormLabel>Apocalyptic Shadow stars</FormLabel>
+                    <FormLabel>
+                      {t("calculator_form.label.apocalyptic_shadow_stars")}
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a star target" />
+                          <SelectValue
+                            placeholder={t(
+                              "calculator_form.placeholder.endgame_star_select"
+                            )}
+                          />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="0">0 stars</SelectItem>
-                        <SelectItem value="1">1 stars</SelectItem>
-                        <SelectItem value="2">2 stars</SelectItem>
-                        <SelectItem value="3">3 stars</SelectItem>
-                        <SelectItem value="4">4 stars</SelectItem>
-                        <SelectItem value="5">5 stars</SelectItem>
-                        <SelectItem value="6">6 stars</SelectItem>
-                        <SelectItem value="7">7 stars</SelectItem>
-                        <SelectItem value="8">8 stars</SelectItem>
-                        <SelectItem value="9">9 stars</SelectItem>
-                        <SelectItem value="10">10 stars</SelectItem>
-                        <SelectItem value="11">11 stars</SelectItem>
-                        <SelectItem value="12">12 stars</SelectItem>
+                        {ENDGAME_STAR_STEPS.pureFiction.map((e, i) => (
+                          <SelectItem value={i.toString()} key={i}>
+                            {t("calculator_form.select.star_amount", {
+                              amount: e,
+                            })}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -411,19 +461,26 @@ export function CalculatorForm({
           </div>
           <div className="flex flex-col items-center justify-center gap-y-2">
             <div className="flex flex-row">
-              <Label className="pr-1">Additional sources</Label>
+              <Label className="pr-1">
+                {t("calculator_form.label.additional_sources")}
+              </Label>
               <SimpleTooltip>
-                Allows you to add any jade/pass sources custom-ly (like events,
-                claimed rewards, bug compensation, HoYoLab check-in, and more)
+                {t("calculator_form.tooltip.additional_sources")}
               </SimpleTooltip>
             </div>
             <ScrollArea className="h-64 w-[22rem] md:w-[30rem] border rounded-lg shadow-xs p-4">
               <div className="flex flex-col items-center justify-center gap-4 mx-2">
                 <ul className="w-full space-y-2 md:space-y-4">
                   <li className="min-w-full grid grid-cols-[1fr_0.25fr_0.25fr_0.25fr] gap-2 md:gap-4 text-center">
-                    <Label>Name</Label>
-                    <Label>Jades</Label>
-                    <Label>Passes</Label>
+                    <Label>
+                      {t("calculator_form.label.additional_sources_name")}
+                    </Label>
+                    <Label>
+                      {t("calculator_form.label.additional_sources_jades")}
+                    </Label>
+                    <Label>
+                      {t("calculator_form.label.additional_sources_passes")}
+                    </Label>
                   </li>
                   {additionalSourcesFields.map((item, index) => {
                     return (
@@ -438,7 +495,9 @@ export function CalculatorForm({
                             <FormItem className="flex flex-col items-start space-x-2 space-y-0">
                               <FormControl>
                                 <Input
-                                  placeholder="name for you to remember!"
+                                  placeholder={t(
+                                    "calculator_form.placeholder.additional_sources_name"
+                                  )}
                                   {...field}
                                 />
                               </FormControl>
@@ -485,7 +544,7 @@ export function CalculatorForm({
                   type="button"
                   onClick={() => append({ name: "", jades: 0, passes: 0 })}
                 >
-                  Add
+                  {t("common.add")}
                 </Button>
               </div>
             </ScrollArea>
@@ -496,9 +555,11 @@ export function CalculatorForm({
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>
-                  <p className="float-left pr-1">End date for calculations</p>
+                  <p className="float-left pr-1">
+                    {t("calculator_form.label.end_date")}
+                  </p>
                   <SimpleTooltip>
-                    Treat as exclusive, as today isn't counted
+                    {t("calculator_form.tooltip.end_date")}
                   </SimpleTooltip>
                 </FormLabel>
                 <Popover>
@@ -512,9 +573,13 @@ export function CalculatorForm({
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          format(field.value, "PPP", {
+                            locale: getDateFnLocales(i18n.language),
+                          })
                         ) : (
-                          <span>Pick a date</span>
+                          <span>
+                            {t("calculator_form.placeholder.end_date")}
+                          </span>
                         )}
                         <CalendarRange className="ml-auto opacity-50" />
                       </Button>
@@ -526,6 +591,7 @@ export function CalculatorForm({
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) => date <= new Date()}
+                      locale={getDateFnLocales(i18n.language)}
                       initialFocus
                     />
                   </PopoverContent>
@@ -535,7 +601,7 @@ export function CalculatorForm({
             )}
           />
         </div>
-        <Button type="submit">Calculate!</Button>
+        <Button type="submit">{t("calculator_form.submit")}</Button>
       </form>
     </Form>
   );

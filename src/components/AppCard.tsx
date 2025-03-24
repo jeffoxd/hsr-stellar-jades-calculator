@@ -2,7 +2,8 @@
 
 import { useState, useContext } from "react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons"; // only radix-ui because i like their github icon
-import { Palette } from "lucide-react";
+import { Palette, Languages, BadgeInfo } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 
 import { ThemeContext, Themes, themes } from "@/components/ThemeProvider";
 import {
@@ -37,6 +38,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import AccordionMarkdownList from "./AccordionMarkdownList";
 import {
   STELLAR_JADE_AMOUNTS,
@@ -48,6 +50,7 @@ import { titleCaseText } from "@/lib/helper";
 import { CalculateResultsReturnType } from "@/lib/calculate";
 
 export function AppCard() {
+  const { i18n, t } = useTranslation();
   const { theme, setTheme } = useContext(ThemeContext);
 
   const [isCalculator, setIsCalculator] = useState<boolean>(true);
@@ -56,60 +59,60 @@ export function AppCard() {
 
   const calculationStepsTableRows = [
     {
-      stepName: "Starting",
+      stepName: t("calculation_terms.starting"),
       jades: calculatorResults?.stellarJades.starting,
       passes: calculatorResults?.limitedPasses.starting,
     },
     {
-      stepName: "Dailies",
+      stepName: t("hsr_terms.dailies"),
       jades: calculatorResults?.calculationSteps.stellarJades.dailiesJades,
       passes: "-",
     },
     {
-      stepName: "Express supply jades",
+      stepName: t("hsr_terms.express_supply"),
       jades:
         calculatorResults?.calculationSteps.stellarJades.expressSupplyJades,
       passes: "-",
     },
     {
-      stepName: "Weekly point rewards",
+      stepName: t("hsr_terms.weekly_point_rewards"),
       jades: calculatorResults?.calculationSteps.stellarJades.pointRewardsJades,
       passes: "-",
     },
     {
-      stepName: "Monthly ember exchange",
+      stepName: t("hsr_terms.monthly_ember_exchange"),
       jades: "-",
       passes:
         calculatorResults?.calculationSteps.limitedPasses.emberExchangePasses,
     },
     {
-      stepName: "Memory of chaos",
+      stepName: t("hsr_terms.memory_of_chaos"),
       jades:
         calculatorResults?.calculationSteps.stellarJades
           .memoryOfChaosStarsJades,
       passes: "-",
     },
     {
-      stepName: "Pure fiction",
+      stepName: t("hsr_terms.pure_fiction"),
       jades:
         calculatorResults?.calculationSteps.stellarJades.pureFictionStarsJades,
       passes: "-",
     },
     {
-      stepName: "Apocalyptic shadow-sm",
+      stepName: t("hsr_terms.apocalyptic_shadow"),
       jades:
         calculatorResults?.calculationSteps.stellarJades
           .apocalypticShadowStarsJades,
       passes: "-",
     },
     {
-      stepName: "Battle pass",
+      stepName: t("hsr_terms.battle_pass"),
       jades: calculatorResults?.calculationSteps.stellarJades.battlePassJades,
       passes:
         calculatorResults?.calculationSteps.limitedPasses.battlePassPasses,
     },
     {
-      stepName: "Additional sources (total)",
+      stepName: t("hsr_terms.additional_sources"),
       jades:
         calculatorResults?.calculationSteps.stellarJades.additionalSourcesJades,
       passes:
@@ -117,7 +120,7 @@ export function AppCard() {
           .additionalSourcesPasses,
     },
     {
-      stepName: "Final total",
+      stepName: t("calculation_terms.final_total"),
       jades: calculatorResults?.stellarJades.total,
       passes: calculatorResults?.limitedPasses.total,
     },
@@ -125,33 +128,50 @@ export function AppCard() {
 
   const rewardTableRows = [
     {
-      rewardName: "Dailies",
-      amountText: `${STELLAR_JADE_AMOUNTS.loginDaily} jades`,
+      rewardName: t("hsr_terms.dailies"),
+      amountText: t("hsr_terms.amount_jades", {
+        amount: STELLAR_JADE_AMOUNTS.loginDaily,
+      }),
     },
     {
-      rewardName: "Express supply pass daily",
-      amountText: `${STELLAR_JADE_AMOUNTS.expressSupplyPassDaily} jades`,
+      rewardName: t("hsr_terms.express_supply"),
+      amountText: t("hsr_terms.amount_jades", {
+        amount: STELLAR_JADE_AMOUNTS.expressSupplyPassDaily,
+      }),
     },
     {
-      rewardName: "Paid battle pass (Nameless Glory)",
-      amountText: `${STELLAR_JADE_AMOUNTS.namelessGlory} jades, ${LIMITED_PASS_AMOUNTS.namelessGlory} limited passes`,
+      rewardName: t("hsr_terms.nameless_glory"),
+      amountText: t("hsr_terms.amount_jades_passes", {
+        jadesAmount: STELLAR_JADE_AMOUNTS.namelessGlory,
+        passesAmount: LIMITED_PASS_AMOUNTS.namelessGlory,
+      }),
     },
     {
-      rewardName: "Paid battle pass (Nameless Medal)",
-      amountText: `${STELLAR_JADE_AMOUNTS.namelessMedal} jades, ${LIMITED_PASS_AMOUNTS.namelessMedal} limited passes`,
+      rewardName: t("hsr_terms.nameless_medal"),
+      amountText: t("hsr_terms.amount_jades_passes", {
+        jadesAmount: STELLAR_JADE_AMOUNTS.namelessMedal,
+        passesAmount: LIMITED_PASS_AMOUNTS.namelessMedal,
+      }),
     },
     {
-      rewardName: "Weekly point rewards (Equilibrium level 0-6)",
-      amountText: `[${STELLAR_JADE_AMOUNTS.pointRewards.toString()}] jades`,
+      rewardName: `${t("hsr_terms.weekly_point_rewards")} ${t(
+        "app_card.reward_table.weekly_point_rewards_extra"
+      )}`,
+      amountText: t("hsr_terms.amount_jades", {
+        amount: `[${STELLAR_JADE_AMOUNTS.pointRewards.toString()}]`,
+      }),
     },
     {
-      rewardName:
-        "Endgame rewards (stars from least to most, currently all the same)",
-      amountText: `[${STELLAR_JADE_AMOUNTS.memoryOfChaos.toString()}] jades`,
+      rewardName: t("app_card.reward_table.endgame_rewards"),
+      amountText: t("hsr_terms.amount_jades", {
+        amount: `[${STELLAR_JADE_AMOUNTS.memoryOfChaos.toString()}]`,
+      }),
     },
     {
-      rewardName: "Ember exchange (every 1st of month)",
-      amountText: `${LIMITED_PASS_AMOUNTS.embersExchange} limited passes`,
+      rewardName: t("hsr_terms.monthly_ember_exchange"),
+      amountText: t("hsr_terms.amount_passes", {
+        amount: LIMITED_PASS_AMOUNTS.embersExchange,
+      }),
     },
   ];
 
@@ -165,14 +185,14 @@ export function AppCard() {
       <div className="flex flex-row w-full justify-between">
         <Button
           variant="secondary"
-          className="self-start mt-2 ml-2"
+          className="mt-2 ml-2"
           onClick={() => setIsCalculator((e) => !e)}
         >
-          {isCalculator ? "About" : "Back"}
+          {isCalculator ? t("common.about") : t("common.back")}
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="secondary" className="self-end mt-2 mr-2">
+            <Button variant="secondary" className="mt-2 mr-2">
               <Palette />
             </Button>
           </DropdownMenuTrigger>
@@ -190,19 +210,48 @@ export function AppCard() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      <div className="w-full justify-between">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" className="float-right mt-2 mr-2">
+              <Languages />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-48">
+            <DropdownMenuRadioGroup
+              value={i18n.language}
+              onValueChange={(value) => {
+                i18n.changeLanguage(value, (err, t) => {
+                  if (err) return console.error("Oops! i18n error", err);
+                });
+              }}
+            >
+              <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="zh-Hans">
+                简体中文
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="zh-Hant">
+                繁體中文
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <CardHeader>
         {isCalculator ? (
           <>
             <CardTitle className="text-4xl">
-              HSR Stellar Jades Calculator
+              {t("app_card.card_title")}
             </CardTitle>
             <CardDescription className="text-md">
-              Configure your jade/pass sources
+              {t("app_card.card_description")}
             </CardDescription>
           </>
         ) : (
           <>
-            <CardTitle className="text-4xl">About</CardTitle>
+            <CardTitle className="text-4xl">
+              {t("app_card.about_title")}
+            </CardTitle>
           </>
         )}
       </CardHeader>
@@ -216,17 +265,21 @@ export function AppCard() {
             />
             {resultsVisible && (
               <div className="border shadow-md p-6 mt-12">
-                <h1 className="text-xl text-center">Estimated results</h1>
+                <h1 className="text-xl text-center">
+                  {t("app_card.results.title")}
+                </h1>
                 <br />
                 <p>
-                  Stellar jades amount gained:{" "}
-                  {calculatorResults.stellarJades.gained}, total stellar jades:{" "}
-                  {calculatorResults.stellarJades.total}
+                  {t("app_card.results.stellar_jades", {
+                    gained: calculatorResults.stellarJades.gained,
+                    total: calculatorResults.stellarJades.total,
+                  })}
                 </p>
                 <p>
-                  Limited passes gained:{" "}
-                  {calculatorResults.limitedPasses.gained}, total limited
-                  passes: {calculatorResults.limitedPasses.total}
+                  {t("app_card.results.limited_passes", {
+                    gained: calculatorResults.limitedPasses.gained,
+                    total: calculatorResults.limitedPasses.total,
+                  })}
                 </p>
                 <Accordion
                   type="single"
@@ -234,14 +287,22 @@ export function AppCard() {
                   className="w-full border p-4 my-4"
                 >
                   <AccordionItem value="item-1">
-                    <AccordionTrigger>Calculation steps</AccordionTrigger>
+                    <AccordionTrigger>
+                      {t("app_card.calculation_steps.title")}
+                    </AccordionTrigger>
                     <AccordionContent>
                       <Table>
                         <TableHeader>
                           <TableRow>
-                            <TableHead>Step name</TableHead>
-                            <TableHead>Jades</TableHead>
-                            <TableHead>Passes</TableHead>
+                            <TableHead>
+                              {t("app_card.calculation_steps.step_column")}
+                            </TableHead>
+                            <TableHead>
+                              {t("app_card.calculation_steps.jades_column")}
+                            </TableHead>
+                            <TableHead>
+                              {t("app_card.calculation_steps.passes_column")}
+                            </TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -261,12 +322,21 @@ export function AppCard() {
                 </Accordion>
                 <Separator decorative className="bg-black my-4" />
                 <p>
-                  <b>Number of pulls:</b> (
-                  {calculatorResults.stellarJades.total} jades ÷{" "}
-                  {STELLAR_JADE_PER_PULL} jades/pull = {jadesPulls} pulls from
-                  jades) + {calculatorResults.limitedPasses.total} limited
-                  passes ={" "}
-                  <b>{jadesPulls + calculatorResults.limitedPasses.total!}</b>
+                  <Trans
+                    t={t}
+                    i18nKey="app_card.results.number_of_pulls"
+                    values={{
+                      stellarJadesTotal: calculatorResults.stellarJades.total,
+                      stellarJadesPerPull: STELLAR_JADE_PER_PULL,
+                      jadesPulls: jadesPulls,
+                      limitedPassesTotal: calculatorResults.limitedPasses.total,
+                      pullsTotal:
+                        jadesPulls + calculatorResults.limitedPasses.total!,
+                    }}
+                    components={{
+                      bold: <b />,
+                    }}
+                  />
                 </p>
               </div>
             )}
@@ -279,13 +349,19 @@ export function AppCard() {
               className="w-full border p-4 my-4"
             >
               <AccordionItem value="item-1">
-                <AccordionTrigger>Reward table</AccordionTrigger>
+                <AccordionTrigger>
+                  {t("app_card.reward_table.title")}
+                </AccordionTrigger>
                 <AccordionContent>
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Rewards</TableHead>
-                        <TableHead>Amount (each instance)</TableHead>
+                        <TableHead>
+                          {t("app_card.reward_table.rewards_column")}
+                        </TableHead>
+                        <TableHead>
+                          {t("app_card.reward_table.amount_column")}
+                        </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -300,6 +376,15 @@ export function AppCard() {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+            {i18n.language !== "en" && (
+              <Alert>
+                <BadgeInfo className="h-4 w-4" />
+                <AlertTitle>{t("app_card.about_alert_title")}</AlertTitle>
+                <AlertDescription>
+                  {t("app_card.about_alert_description")}
+                </AlertDescription>
+              </Alert>
+            )}
             <AccordionMarkdownList value={aboutAccordionText} />
           </>
         )}
@@ -308,38 +393,15 @@ export function AppCard() {
       <CardFooter className="flex flex-col items-center justify-center">
         {isCalculator ? (
           <div className="flex flex-col items-center justify-center mb-4 md:mx-16">
-            <h1 className="text-3xl mb-4">Assumptions</h1>
+            <h1 className="text-3xl mb-4">{t("app_card.assumptions")}</h1>
             <ul className="list-disc list-inside text-sm">
-              <li>
-                Dailies are fully claimed every day, it will be counted assuming
-                you've claimed today's
-              </li>
-              <li>
-                Simulated/Divergent Universe Points Rewards is fully claimed
-                every Monday
-              </li>
-              <li>
-                Nameless Glory is reset every patch, which is usually 42 days
-              </li>
-              <li>
-                Nameless Glory passes are all claimed (why would you buy if you
-                can&apos;t get them all?)
-              </li>
-              <li>
-                Endgame content (MOC, PF, AS) resets every 42 days, following
-                the format since 22 July 2024 (MoC)
-              </li>
-              <li>
-                Endgame content is cleared ASAP, and the current endgame content
-                event is counted as done. Meaning let&apos;s say the period you
-                are estimating your endgame content gains has 3 MoC happening,
-                it will only count the rewards from those 3 and not the current
-                happening one
-              </li>
-              <li>
-                Passes from Embers Exchange reset 1st of every month, and all 5
-                is bought every month
-              </li>
+              {(
+                t("app_card.assumption_array", {
+                  returnObjects: true,
+                }) as string[]
+              ).map((e, i) => (
+                <li key={i}>{e}</li>
+              ))}
             </ul>
           </div>
         ) : (
@@ -349,15 +411,14 @@ export function AppCard() {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com"
+            href="https://github.com/jeffoxd/hsr-stellar-jades-calculator"
             className="hover:text-gray-600 visited:text-black"
           >
             <GitHubLogoIcon width="30" height="30" />
           </a>
         </div>
         <div className="mt-2 text-muted-foreground text-xs">
-          © All rights reserved. References game by Hoyoverse/miHoYo. Other
-          properties belong to their respective owners.
+          {t("app_card.copyright_footer")}
         </div>
       </CardFooter>
     </Card>

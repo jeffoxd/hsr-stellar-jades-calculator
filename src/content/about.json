@@ -1,15 +1,15 @@
 [
   {
     "title": "Why make this?",
-    "content": "Portfolio for my resume and because I got to sharpen my skills hehe~"
+    "content": "Portfolio and because I got to sharpen my skills hehe~"
   },
   {
     "title": "Tech stack?",
     "content": "Using [React](https://react.dev/) via [Vite](https://vite.dev/) on [Typescript](https://www.typescriptlang.org/), big help from [shadcn/ui](https://ui.shadcn.com/)!"
   },
   {
-    "title": "Have an issue?",
-    "content": "or contact me via [email](mailto:jeffoxd50@gmail.com)."
+    "title": "Found an issue? Or suggestions?",
+    "content": "For issues, try clearing cache & cookies first.<br /> If it persists, report via [Github Issues](https://github.com/jeffoxd/hsr-stellar-jades-calculator/issues) or contact me via [email](mailto:jeffoxd50@gmail.com)~"
   },
   {
     "title": "Who are you?",
@@ -25,7 +25,7 @@
   },
   {
     "title": "Fun facts",
-    "content": "* The March Hunt theme background is the combination of Yanqing's and Yunli's color, there's also Immortal Delight's (boba tea she drinks) color!\n * I love March 7th~"
+    "content": "- The March Hunt theme background is the combination of Yanqing's and Yunli's color, there's also Immortal Delight's (boba tea she drinks) color!\n - I love March 7th~"
   },
   {
     "title": "NOTICE",
