@@ -26,7 +26,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import SimpleTooltip from "@/components/SimpleTooltip";
+import SmartTooltip from "@/components/custom-ui/SmartTooltip";
 import {
   STELLAR_JADE_AMOUNTS,
   LIMITED_PASS_AMOUNTS,
@@ -182,11 +182,11 @@ export function CalculatorForm({
                       <p className="float-left pr-1">
                         {t("calculator_form.label.express_supply_pass")}
                       </p>
-                      <SimpleTooltip>
+                      <SmartTooltip>
                         {t("calculator_form.tooltip.express_supply_pass", {
                           amount: STELLAR_JADE_AMOUNTS.expressSupplyPassDaily,
                         })}
-                      </SimpleTooltip>
+                      </SmartTooltip>
                     </FormLabel>
                     <FormControl>
                       <Checkbox
@@ -226,7 +226,7 @@ export function CalculatorForm({
                         <p className="float-left flex-1">
                           {t("calculator_form.label.battle_pass_type")}
                         </p>
-                        <SimpleTooltip>
+                        <SmartTooltip>
                           {t("calculator_form.tooltip.battle_pass_type", {
                             namelessGloryJades:
                               STELLAR_JADE_AMOUNTS.namelessGlory,
@@ -234,7 +234,7 @@ export function CalculatorForm({
                               STELLAR_JADE_AMOUNTS.namelessMedal,
                             limitedPass: LIMITED_PASS_AMOUNTS.namelessGlory,
                           })}
-                        </SimpleTooltip>
+                        </SmartTooltip>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
@@ -275,9 +275,9 @@ export function CalculatorForm({
                     <p className="float-left pr-1">
                       {t("calculator_form.label.point_rewards")}
                     </p>
-                    <SimpleTooltip>
+                    <SmartTooltip>
                       {t("calculator_form.tooltip.point_rewards")}
-                    </SimpleTooltip>
+                    </SmartTooltip>
                   </FormLabel>
                   <FormControl>
                     <Checkbox
@@ -335,9 +335,9 @@ export function CalculatorForm({
                   <p className="float-left pr-1">
                     {t("calculator_form.label.embers_exchange_five_passes")}
                   </p>
-                  <SimpleTooltip>
+                  <SmartTooltip>
                     {t("calculator_form.tooltip.embers_exchange_five_passes")}
-                  </SimpleTooltip>
+                  </SmartTooltip>
                 </FormLabel>
                 <FormControl>
                   <Checkbox
@@ -464,9 +464,9 @@ export function CalculatorForm({
               <Label className="pr-1">
                 {t("calculator_form.label.additional_sources")}
               </Label>
-              <SimpleTooltip>
+              <SmartTooltip>
                 {t("calculator_form.tooltip.additional_sources")}
-              </SimpleTooltip>
+              </SmartTooltip>
             </div>
             <ScrollArea className="border rounded-lg shadow-xs px-2 py-4">
               <div className="flex flex-col items-center justify-center gap-4 mx-2">
@@ -560,9 +560,9 @@ export function CalculatorForm({
                   <p className="float-left pr-1">
                     {t("calculator_form.label.end_date")}
                   </p>
-                  <SimpleTooltip>
+                  <SmartTooltip>
                     {t("calculator_form.tooltip.end_date")}
-                  </SimpleTooltip>
+                  </SmartTooltip>
                 </FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>

@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons"; // only radix-ui because i like their github icon
 import { Palette, Languages, BadgeInfo } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { ThemeContext, Themes, themes } from "@/components/ThemeProvider";
+import { Themes, themes, useTheme } from "@/providers/ThemeProvider";
 import {
   Card,
   CardContent,
@@ -39,7 +39,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import AccordionMarkdownList from "./AccordionMarkdownList";
+import AccordionMarkdownList from "./custom-ui/AccordionMarkdownList";
 import {
   STELLAR_JADE_AMOUNTS,
   LIMITED_PASS_AMOUNTS,
@@ -51,7 +51,7 @@ import { CalculateResultsReturnType } from "@/lib/calculate";
 
 export function AppCard() {
   const { i18n, t } = useTranslation();
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setTheme } = useTheme();
 
   const [isCalculator, setIsCalculator] = useState<boolean>(true);
   const [calculatorResults, setCalculatorResults] =

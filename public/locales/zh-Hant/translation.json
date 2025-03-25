@@ -2,7 +2,8 @@
   "common": {
     "about": "關於",
     "back": "後退",
-    "add": "新增"
+    "add": "新增",
+    "acknowledge": "確定"
   },
   "hsr_terms": {
     "dailies": "每日訓練",

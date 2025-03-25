@@ -2,7 +2,8 @@
   "common": {
     "about": "About",
     "back": "Back",
-    "add": "Add"
+    "add": "Add",
+    "acknowledge": "OK"
   },
   "hsr_terms": {
     "dailies": "Dailies",
