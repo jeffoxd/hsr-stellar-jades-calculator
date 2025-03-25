@@ -10,16 +10,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 export default function SmartTooltip(
@@ -30,23 +29,24 @@ export default function SmartTooltip(
 
   if (isTouch)
     return (
-      <AlertDialog {...props}>
-        <AlertDialogTrigger asChild>
+      <Dialog {...props}>
+        <DialogTrigger asChild>
           <Button variant="outline" size="icon" className="w-6 h-5">
             <CircleHelp className="size-4" strokeWidth={1.5} />
           </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <p>{props.children}</p>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel className="bg-primary text-primary-foreground">
+        </DialogTrigger>
+        <DialogContent hideClose>
+          <DialogHeader>
+            <DialogTitle className="font-normal">{props.children}</DialogTitle>
+            <DialogDescription />
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose className="bg-primary text-primary-foreground h-10 rounded-xl">
               {t("common.acknowledge")}
-            </AlertDialogCancel>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     );
   else
     return (
