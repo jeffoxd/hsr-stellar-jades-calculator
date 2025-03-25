@@ -468,10 +468,10 @@ export function CalculatorForm({
                 {t("calculator_form.tooltip.additional_sources")}
               </SimpleTooltip>
             </div>
-            <ScrollArea className="h-64 w-[22rem] md:w-[30rem] border rounded-lg shadow-xs p-4">
+            <ScrollArea className="border rounded-lg shadow-xs px-2 py-4">
               <div className="flex flex-col items-center justify-center gap-4 mx-2">
                 <ul className="w-full space-y-2 md:space-y-4">
-                  <li className="min-w-full grid grid-cols-[1fr_0.25fr_0.25fr_0.25fr] gap-2 md:gap-4 text-center">
+                  <li className="min-w-full grid grid-cols-[1fr_0.25fr_0.25fr_0.1fr] gap-2 md:gap-4 text-center">
                     <Label>
                       {t("calculator_form.label.additional_sources_name")}
                     </Label>
@@ -485,7 +485,7 @@ export function CalculatorForm({
                   {additionalSourcesFields.map((item, index) => {
                     return (
                       <li
-                        className="grid grid-cols-[1fr_0.25fr_0.25fr_0.25fr] gap-2 md:gap-4"
+                        className="grid grid-cols-[1fr_0.25fr_0.25fr_0.1fr] gap-2 md:gap-4"
                         key={item.id}
                       >
                         <FormField
@@ -530,7 +530,9 @@ export function CalculatorForm({
                           )}
                         />
                         <Button
+                          className="px-3"
                           variant="destructive"
+                          disabled={additionalSourcesFields.length === 1}
                           onClick={() => remove(index)}
                         >
                           <X />
@@ -568,7 +570,7 @@ export function CalculatorForm({
                       <Button
                         variant="input"
                         className={cn(
-                          "w-[240px] pl-3 text-left font-normal",
+                          "pl-3 text-left font-normal",
                           !field.value && "text-muted-foreground"
                         )}
                       >

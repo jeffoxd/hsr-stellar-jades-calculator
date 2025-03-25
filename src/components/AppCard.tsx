@@ -356,7 +356,7 @@ export function AppCard() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>
+                        <TableHead className="min-w-32">
                           {t("app_card.reward_table.rewards_column")}
                         </TableHead>
                         <TableHead>
