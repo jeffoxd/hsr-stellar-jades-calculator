@@ -61,6 +61,7 @@
       "終極內容盡快完成, 已完成現有的終極內容。意思說如果計算期間忘卻之庭發生了四次，它只會計算三次的獎勵而不是現有的",
       "從星芒兌換的星軌專票每月一日刷新，然後全五張都兌換"
     ],
+    "feedback_footer_markdown": "有問題或意見? 請使用[GitHub Issues](https://github.com/jeffoxd/hsr-stellar-jades-calculator/issues)或透過[電子郵件](mailto:jeffoxd50@gmail.com)聯絡我~",
     "copyright_footer": "© 保留所有權利。HoYoverse/米哈遊版權所有。其他財產屬於其各自所有者。"
   },
   "calculator_form": {
@@ -103,6 +104,11 @@
       "embers_exchange_five_passes": "假定每月一日刷新時領取全五張 （除了本月）",
       "additional_sources": "讓您新增任何額外星瓊和星軌專票的收入（例如活動，兌換碼，補償，HoYoLAB簽到等等）",
       "end_date": "可以把這個日期當成被排除，不包括今日"
+    },
+    "validation": {
+      "valid_positive_number": "請輸入正數",
+      "select_required": "請選擇一個選項",
+      "text_cannot_exceed": "此文不可超過{{amount}}個字"
     }
   }
 }

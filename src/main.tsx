@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import "@/init";
 import "@/globals.css";
 import "@/lib/i18n";
+import "@/lib/marked";
 import App from "@/App";
 
 createRoot(document.getElementById("root")!).render(

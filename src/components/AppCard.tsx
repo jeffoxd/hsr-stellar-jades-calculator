@@ -4,6 +4,7 @@ import { useState } from "react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons"; // only radix-ui because i like their github icon
 import { Palette, Languages, BadgeInfo } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
+import { marked } from "marked";
 
 import { Themes, themes, useTheme } from "@/providers/ThemeProvider";
 import {
@@ -417,7 +418,19 @@ export function AppCard() {
             <GitHubLogoIcon width="30" height="30" />
           </a>
         </div>
-        <div className="mt-2 text-muted-foreground text-xs">
+        {/* <div
+          className="prose-ul:list-disc prose-ul:list-inside"
+          dangerouslySetInnerHTML={{
+            __html: marked.parse(item.content),
+          }}
+        /> */}
+        <div
+          className="mt-2 text-muted-foreground text-xs"
+          dangerouslySetInnerHTML={{
+            __html: marked.parse(t("app_card.feedback_footer_markdown")),
+          }}
+        />
+        <div className="mt-1 text-muted-foreground text-xs">
           {t("app_card.copyright_footer")}
         </div>
       </CardFooter>

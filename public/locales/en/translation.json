@@ -61,6 +61,7 @@
       "Endgame content is cleared ASAP, and the current endgame content event is counted as done. Meaning let's say the period you are calculating has 4 MoC occurrences, it will only count the rewards from those 3 and not the current happening one",
       "Passes from Embers Exchange reset 1st of every month, and all 5 is bought every month"
     ],
+    "feedback_footer_markdown": "Issues or suggestions? Use [GitHub Issues](https://github.com/jeffoxd/hsr-stellar-jades-calculator/issues) or contact me via [email](mailto:jeffoxd50@gmail.com)~",
     "copyright_footer": "© All rights reserved. References game by HoYoverse/miHoYo. Other properties belong to their respective owners."
   },
   "calculator_form": {
@@ -103,6 +104,11 @@
       "embers_exchange_five_passes": "Assuming 5 exchanged every 1st of month when it refreshes (excluding this month)",
       "additional_sources": "Allows you to add any jade/pass sources custom-ly (like events, code redemption, compensations, HoYoLAB check-in, and more)",
       "end_date": "Treat as exclusive, as today isn't counted"
+    },
+    "validation": {
+      "valid_positive_number": "Please enter a positive number",
+      "select_required": "Please make a selection",
+      "text_cannot_exceed": "Text cannot exceed {{amount}} characters"
     }
   }
 }

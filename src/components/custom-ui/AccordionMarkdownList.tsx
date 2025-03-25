@@ -17,20 +17,6 @@ export default function AccordionMarkdownList({
 }: {
   value: Array<{ title: string; content: string }>;
 }) {
-  // https://github.com/markedjs/marked/issues/655#issuecomment-712380889
-  const renderer = new marked.Renderer();
-  const linkRenderer = renderer.link;
-  renderer.link = (link) => {
-    const { href } = link;
-    const localLink = href.startsWith(
-      `${location.protocol}//${location.hostname}`
-    );
-    const html = linkRenderer.call(renderer, link);
-    return localLink
-      ? html
-      : html.replace(/^<a /, `<a target="_blank" rel="noreferrer noopener" `);
-  };
-
   return (
     <Accordion type="multiple">
       {value.map((item, i) => (
@@ -42,9 +28,9 @@ export default function AccordionMarkdownList({
             <div
               className="prose-ul:list-disc prose-ul:list-inside"
               dangerouslySetInnerHTML={{
-                __html: marked.parse(item.content, { renderer }),
+                __html: marked.parse(item.content),
               }}
-            ></div>
+            />
           </AccordionContent>
         </AccordionItem>
       ))}

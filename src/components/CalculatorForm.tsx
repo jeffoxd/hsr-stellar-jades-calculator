@@ -56,40 +56,63 @@ export function CalculatorForm({
   const { i18n, t } = useTranslation();
 
   const formSchema = z.object({
-    startingStellarJades: z.coerce.number().nonnegative({
-      message: "Can't be negative",
-    }),
-    startingLimitedPasses: z.coerce.number().nonnegative({
-      message: "Can't be negative",
-    }),
+    startingStellarJades: z.coerce
+      .number({
+        message: t("calculator_form.validation.valid_positive_number"),
+      })
+      .nonnegative({
+        message: t("calculator_form.validation.valid_positive_number"),
+      }),
+    startingLimitedPasses: z.coerce
+      .number({
+        message: t("calculator_form.validation.valid_positive_number"),
+      })
+      .nonnegative({
+        message: t("calculator_form.validation.valid_positive_number"),
+      }),
     expressSupplyPass: z.boolean(),
     paidBattlePass: z.boolean(),
     battlePassType: z.string({
-      required_error: "Please select a battle pass type",
+      required_error: t("calculator_form.validation.select_required"),
     }),
     pointRewards: z.boolean(),
     pointRewardsEquilibrium: z.string({
-      required_error: "Please select a point rewards Equilibrium Level",
+      required_error: t("calculator_form.validation.select_required"),
     }),
     embersExchangeFivePasses: z.boolean(),
     memoryOfChaosStars: z.string({
-      required_error: "Please select a MoC star target",
+      required_error: t("calculator_form.validation.select_required"),
     }),
     pureFictionStars: z.string({
-      required_error: "Please select a PF star target",
+      required_error: t("calculator_form.validation.select_required"),
     }),
     apocalypticShadowStars: z.string({
-      required_error: "Please select a AS star target",
+      required_error: t("calculator_form.validation.select_required"),
     }),
     additionalSources: z.array(
       z.object({
-        name: z.string().trim(),
-        jades: z.coerce.number().nonnegative({
-          message: "Can't be negative",
-        }),
-        passes: z.coerce.number().nonnegative({
-          message: "Can't be negative",
-        }),
+        name: z
+          .string()
+          .trim()
+          .max(2000, {
+            message: t("calculator_form.validation.text_cannot_exceed", {
+              amount: 2000,
+            }),
+          }),
+        jades: z.coerce
+          .number({
+            message: t("calculator_form.validation.valid_positive_number"),
+          })
+          .nonnegative({
+            message: t("calculator_form.validation.valid_positive_number"),
+          }),
+        passes: z.coerce
+          .number({
+            message: t("calculator_form.validation.valid_positive_number"),
+          })
+          .nonnegative({
+            message: t("calculator_form.validation.valid_positive_number"),
+          }),
       })
     ),
     endDate: z.date({
@@ -98,6 +121,7 @@ export function CalculatorForm({
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
+    mode: "onChange",
     resolver: zodResolver(formSchema),
     defaultValues: {
       startingStellarJades: 0,
