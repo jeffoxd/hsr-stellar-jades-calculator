@@ -418,12 +418,6 @@ export function AppCard() {
             <GitHubLogoIcon width="30" height="30" />
           </a>
         </div>
-        {/* <div
-          className="prose-ul:list-disc prose-ul:list-inside"
-          dangerouslySetInnerHTML={{
-            __html: marked.parse(item.content),
-          }}
-        /> */}
         <div
           className="mt-2 text-muted-foreground text-xs"
           dangerouslySetInnerHTML={{
