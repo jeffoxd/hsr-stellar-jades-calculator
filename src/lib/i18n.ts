@@ -19,7 +19,8 @@ i18n
       backends: [LocalStorageBackend, HttpBackend],
       backendOptions: [
         {
-          expirationTime: 3 * 24 * 60 * 60 * 1000, // 3 days
+          expirationTime: 7 * 24 * 60 * 60 * 1000, // 7 days
+          versions: { en: "v0.8", zh: "v0.8" },
         },
         {
           loadPath: "/locales/{{lng}}/translation.json",
