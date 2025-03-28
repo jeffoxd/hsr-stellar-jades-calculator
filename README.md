@@ -8,6 +8,8 @@ Lower-bound pulls estimation from today to end date for the hit game [Honkai: St
 
 Built using [React](https://react.dev/) via [Vite](https://vite.dev/) on [Typescript](https://www.typescriptlang.org/), big help from [shadcn/ui](https://ui.shadcn.com/)!
 
+[i18next](https://www.i18next.com/) for localisation, [Tailwind CSS](https://tailwindcss.com/) for theming (using own Theme Provider)
+
 </div>
 
 ## Features
@@ -23,18 +25,28 @@ Built using [React](https://react.dev/) via [Vite](https://vite.dev/) on [Typesc
 
 Main form (remembers unsubmitted data)
 ![Main form](docs/images/main_form.png)
-Supports multiple languages (remembers last set language)
-![Localisation](docs/images/localisation.png)
+
 Custom amount to add in form
 ![Additional sources](docs/images/additional_sources.png)
+
+Mobile-friendly tooltip (detects if device is touch and switches if it is)
+![Mobile tooltip](docs/images/mobile_tooltip.png)
+
 Detailed results with calculation steps
 ![Results](docs/images/results.png)
+
 Reward table of the game, for the curious ones
 ![Reward table](docs/images/reward_table.png)
+
+Supports multiple languages (remembers last set language)
+![Localisation](docs/images/localisation.png)
+
 Allows users to switch between themes (remembers last set theme)
 ![Theme selector](docs/images/theme_selector.png)
+
 Night Time theme
 ![Night Time theme](docs/images/main_form_nighttime.png)
+
 Just my fav theme from my fav character <3
 ![March 7th Preservation theme](docs/images/main_form_m7pres.png)
 

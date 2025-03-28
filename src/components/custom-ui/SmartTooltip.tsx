@@ -37,7 +37,9 @@ export default function SmartTooltip(
         </DialogTrigger>
         <DialogContent hideClose>
           <DialogHeader>
-            <DialogTitle className="font-normal">{props.children}</DialogTitle>
+            <DialogTitle className="font-normal text-balance">
+              {props.children}
+            </DialogTitle>
             <DialogDescription />
           </DialogHeader>
           <DialogFooter>
