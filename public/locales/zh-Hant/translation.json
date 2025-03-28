@@ -66,6 +66,7 @@
   },
   "calculator_form": {
     "submit": "算吧!",
+    "reset": "重置",
     "label": {
       "starting_stellar_jades": "現有星瓊",
       "starting_limited_passes": "現有星軌專票",

@@ -49,6 +49,7 @@ import {
 import aboutAccordionText from "@/content/about.json";
 import { titleCaseText } from "@/lib/helper";
 import { CalculateResultsReturnType } from "@/lib/calculate";
+import { cn } from "@/lib/utils";
 
 export function AppCard() {
   const { i18n, t } = useTranslation();
@@ -264,136 +265,134 @@ export function AppCard() {
         )}
       </CardHeader>
       <CardContent className="w-full text-lg">
-        {isCalculator ? (
-          <>
-            <CalculatorForm
-              onResult={(results) => {
-                setCalculatorResults(results);
-              }}
-            />
-            {resultsVisible && (
-              <div className="border shadow-md p-6 mt-12">
-                <h1 className="text-center">{t("app_card.results.title")}</h1>
-                <br />
-                <p>
-                  {t("app_card.results.stellar_jades", {
-                    gained: calculatorResults.stellarJades.gained,
-                    total: calculatorResults.stellarJades.total,
-                  })}
-                </p>
-                <p>
-                  {t("app_card.results.limited_passes", {
-                    gained: calculatorResults.limitedPasses.gained,
-                    total: calculatorResults.limitedPasses.total,
-                  })}
-                </p>
-                <Accordion
-                  type="single"
-                  collapsible
-                  className="w-full border p-4 my-4"
-                >
-                  <AccordionItem value="item-1">
-                    <AccordionTrigger>
-                      {t("app_card.calculation_steps.title")}
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>
-                              {t("app_card.calculation_steps.step_column")}
-                            </TableHead>
-                            <TableHead>
-                              {t("app_card.calculation_steps.jades_column")}
-                            </TableHead>
-                            <TableHead>
-                              {t("app_card.calculation_steps.passes_column")}
-                            </TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {calculationStepsTableRows.map(
-                            ({ stepName, jades, passes }, i) => (
-                              <TableRow key={i}>
-                                <TableCell>{stepName}</TableCell>
-                                <TableCell>{jades}</TableCell>
-                                <TableCell>{passes}</TableCell>
-                              </TableRow>
-                            )
-                          )}
-                        </TableBody>
-                      </Table>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-                <Separator decorative className="bg-black my-4" />
-                <p>
-                  <Trans
-                    t={t}
-                    i18nKey="app_card.results.number_of_pulls"
-                    values={{
-                      stellarJadesTotal: calculatorResults.stellarJades.total,
-                      stellarJadesPerPull: STELLAR_JADE_PER_PULL,
-                      jadesPulls: jadesPulls,
-                      limitedPassesTotal: calculatorResults.limitedPasses.total,
-                      pullsTotal:
-                        jadesPulls + calculatorResults.limitedPasses.total!,
-                    }}
-                    components={{
-                      bold: <b />,
-                    }}
-                  />
-                </p>
-              </div>
-            )}
-          </>
-        ) : (
-          <>
-            <Accordion
-              type="single"
-              collapsible
-              className="w-full border p-4 mb-4"
-            >
-              <AccordionItem value="item-1">
-                <AccordionTrigger>
-                  {t("app_card.reward_table.title")}
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="min-w-32">
-                          {t("app_card.reward_table.rewards_column")}
-                        </TableHead>
-                        <TableHead>
-                          {t("app_card.reward_table.amount_column")}
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {rewardTableRows.map(({ rewardName, amountText }, i) => (
-                        <TableRow key={i}>
-                          <TableCell>{rewardName}</TableCell>
-                          <TableCell>{amountText}</TableCell>
+        <div className={cn("flex flex-col", { hidden: !isCalculator })}>
+          <CalculatorForm
+            className="flex flex-col items-center justify-center space-y-8"
+            onResult={(results) => {
+              setCalculatorResults(results);
+            }}
+          />
+          {resultsVisible && (
+            <div className="border shadow-md p-6 mt-12">
+              <h1 className="text-center">{t("app_card.results.title")}</h1>
+              <br />
+              <p>
+                {t("app_card.results.stellar_jades", {
+                  gained: calculatorResults.stellarJades.gained,
+                  total: calculatorResults.stellarJades.total,
+                })}
+              </p>
+              <p>
+                {t("app_card.results.limited_passes", {
+                  gained: calculatorResults.limitedPasses.gained,
+                  total: calculatorResults.limitedPasses.total,
+                })}
+              </p>
+              <Accordion
+                type="single"
+                collapsible
+                className="w-full border p-4 my-4"
+              >
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>
+                    {t("app_card.calculation_steps.title")}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>
+                            {t("app_card.calculation_steps.step_column")}
+                          </TableHead>
+                          <TableHead>
+                            {t("app_card.calculation_steps.jades_column")}
+                          </TableHead>
+                          <TableHead>
+                            {t("app_card.calculation_steps.passes_column")}
+                          </TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-            {i18n.language !== "en" && (
-              <Alert>
-                <BadgeInfo className="h-4 w-4" />
-                <AlertTitle>{t("app_card.about_alert_title")}</AlertTitle>
-                <AlertDescription>
-                  {t("app_card.about_alert_description")}
-                </AlertDescription>
-              </Alert>
-            )}
-            <AccordionMarkdownList value={aboutAccordionText} />
-          </>
-        )}
+                      </TableHeader>
+                      <TableBody>
+                        {calculationStepsTableRows.map(
+                          ({ stepName, jades, passes }, i) => (
+                            <TableRow key={i}>
+                              <TableCell>{stepName}</TableCell>
+                              <TableCell>{jades}</TableCell>
+                              <TableCell>{passes}</TableCell>
+                            </TableRow>
+                          )
+                        )}
+                      </TableBody>
+                    </Table>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+              <Separator decorative className="bg-black my-4" />
+              <p>
+                <Trans
+                  t={t}
+                  i18nKey="app_card.results.number_of_pulls"
+                  values={{
+                    stellarJadesTotal: calculatorResults.stellarJades.total,
+                    stellarJadesPerPull: STELLAR_JADE_PER_PULL,
+                    jadesPulls: jadesPulls,
+                    limitedPassesTotal: calculatorResults.limitedPasses.total,
+                    pullsTotal:
+                      jadesPulls + calculatorResults.limitedPasses.total!,
+                  }}
+                  components={{
+                    bold: <b />,
+                  }}
+                />
+              </p>
+            </div>
+          )}
+        </div>
+        <div className={cn("flex, flex-col", { hidden: isCalculator })}>
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full border p-4 mb-4"
+          >
+            <AccordionItem value="item-1">
+              <AccordionTrigger>
+                {t("app_card.reward_table.title")}
+              </AccordionTrigger>
+              <AccordionContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="min-w-32">
+                        {t("app_card.reward_table.rewards_column")}
+                      </TableHead>
+                      <TableHead>
+                        {t("app_card.reward_table.amount_column")}
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {rewardTableRows.map(({ rewardName, amountText }, i) => (
+                      <TableRow key={i}>
+                        <TableCell>{rewardName}</TableCell>
+                        <TableCell>{amountText}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          {i18n.language !== "en" && (
+            <Alert>
+              <BadgeInfo className="h-4 w-4" />
+              <AlertTitle>{t("app_card.about_alert_title")}</AlertTitle>
+              <AlertDescription>
+                {t("app_card.about_alert_description")}
+              </AlertDescription>
+            </Alert>
+          )}
+          <AccordionMarkdownList value={aboutAccordionText} />
+        </div>
       </CardContent>
       {isCalculator && <Separator decorative className="my-4" />}
       <CardFooter className="flex flex-col items-center justify-center">

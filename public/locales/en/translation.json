@@ -66,6 +66,7 @@
   },
   "calculator_form": {
     "submit": "Calculate!",
+    "reset": "Reset",
     "label": {
       "starting_stellar_jades": "Current stellar jades",
       "starting_limited_passes": "Current limited passes",

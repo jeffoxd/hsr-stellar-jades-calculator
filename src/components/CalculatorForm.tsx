@@ -1,7 +1,8 @@
 "use client";
 
+import React, { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { format, addDays } from "date-fns";
 import { CalendarRange, X } from "lucide-react";
@@ -48,10 +49,29 @@ import {
 } from "@/lib/calculate";
 import { getDateFnLocales } from "@/lib/locale";
 
+type FormData = {
+  startingStellarJades: number;
+  startingLimitedPasses: number;
+  expressSupplyPass: boolean;
+  paidBattlePass: boolean;
+  battlePassType: string;
+  pointRewards: boolean;
+  pointRewardsEquilibrium: string;
+  embersExchangeFivePasses: boolean;
+  memoryOfChaosStars: string;
+  pureFictionStars: string;
+  apocalypticShadowStars: string;
+  additionalSources: Array<{ name: string; jades: number; passes: number }>;
+  endDate: Date;
+};
+
 export function CalculatorForm({
   onResult,
+  className,
+  ...props
 }: {
   onResult: (results: CalculateResultsReturnType) => void;
+  className: string;
 }) {
   const { i18n, t } = useTranslation();
 
@@ -120,24 +140,46 @@ export function CalculatorForm({
     }),
   });
 
+  const FORM_DATA_KEY = "calculator_form_data";
+  const defaultData = {
+    startingStellarJades: 0,
+    startingLimitedPasses: 0,
+    expressSupplyPass: false,
+    paidBattlePass: false,
+    battlePassType: "0",
+    pointRewards: false,
+    pointRewardsEquilibrium: "6",
+    embersExchangeFivePasses: false,
+    memoryOfChaosStars: "0",
+    pureFictionStars: "0",
+    apocalypticShadowStars: "0",
+    additionalSources: [{ name: "", jades: 0, passes: 0 }],
+    endDate: addDays(new Date(), 1),
+  };
+
+  const loadLocalData = (): FormData | null => {
+    const storageData = localStorage.getItem(FORM_DATA_KEY);
+    if (storageData) {
+      // Parse it to a javaScript object
+      let data: FormData | null = null;
+      try {
+        data = JSON.parse(storageData);
+      } catch (err) {
+        console.error(err);
+      }
+      return data;
+    }
+    return null;
+  };
+
+  const savedValues = loadLocalData();
+  if (savedValues != null) savedValues.endDate = new Date(savedValues.endDate);
+  const defaultValues = savedValues ?? defaultData;
+
   const form = useForm<z.infer<typeof formSchema>>({
     mode: "onChange",
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      startingStellarJades: 0,
-      startingLimitedPasses: 0,
-      expressSupplyPass: false,
-      paidBattlePass: false,
-      battlePassType: "0",
-      pointRewards: false,
-      pointRewardsEquilibrium: "6",
-      embersExchangeFivePasses: false,
-      memoryOfChaosStars: "0",
-      pureFictionStars: "0",
-      apocalypticShadowStars: "0",
-      additionalSources: [{ name: "", jades: 0, passes: 0 }],
-      endDate: addDays(new Date(), 1),
-    },
+    defaultValues,
   });
 
   const {
@@ -149,17 +191,29 @@ export function CalculatorForm({
     control: form.control,
   });
 
+  const watchValues = useWatch({ control: form.control });
+  useEffect(() => {
+    localStorage.setItem(FORM_DATA_KEY, JSON.stringify(form.getValues()));
+  }, [watchValues]);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
+    localStorage.removeItem(FORM_DATA_KEY);
     const parsedConfigurations = parseConfigurations(values);
     const results = calculateResults(parsedConfigurations);
     onResult(results);
+  }
+
+  function onReset() {
+    form.reset(defaultData);
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center space-y-8"
+        onReset={() => onReset()}
+        className={className}
+        {...props}
       >
         <div className="flex flex-col items-center justify-center space-y-4">
           <div className="flex flex-row gap-2">
@@ -262,7 +316,7 @@ export function CalculatorForm({
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        value={field.value}
                       >
                         <FormControl>
                           <SelectTrigger>
@@ -321,10 +375,7 @@ export function CalculatorForm({
                   <FormLabel>
                     {t("calculator_form.label.point_rewards_equilibrium")}
                   </FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue
@@ -384,10 +435,7 @@ export function CalculatorForm({
                     <FormLabel>
                       {t("calculator_form.label.memory_of_chaos_stars")}
                     </FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue
@@ -419,10 +467,7 @@ export function CalculatorForm({
                     <FormLabel>
                       {t("calculator_form.label.pure_fiction_stars")}
                     </FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue
@@ -454,10 +499,7 @@ export function CalculatorForm({
                     <FormLabel>
                       {t("calculator_form.label.apocalyptic_shadow_stars")}
                     </FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue
@@ -628,7 +670,17 @@ export function CalculatorForm({
             )}
           />
         </div>
-        <Button type="submit">{t("calculator_form.submit")}</Button>
+        <div className="flex flex-row items-center justify-center gap-4">
+          <Button
+            type="submit"
+            disabled={!form.formState.isValid || form.formState.isSubmitting}
+          >
+            {t("calculator_form.submit")}
+          </Button>
+          <Button type="reset" variant="outline">
+            {t("calculator_form.reset")}
+          </Button>
+        </div>
       </form>
     </Form>
   );

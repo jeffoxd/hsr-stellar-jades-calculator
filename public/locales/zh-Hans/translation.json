@@ -66,6 +66,7 @@
   },
   "calculator_form": {
     "submit": "算吧!",
+    "reset": "重置",
     "label": {
       "starting_stellar_jades": "现有星琼",
       "starting_limited_passes": "现有星轨专票",
