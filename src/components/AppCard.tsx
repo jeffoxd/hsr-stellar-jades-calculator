@@ -423,15 +423,17 @@ export function AppCard() {
             <GitHubLogoIcon width="30" height="30" />
           </a>
         </div>
-        <div
-          className="mt-2 text-muted-foreground text-xs"
-          dangerouslySetInnerHTML={{
-            __html: marked.parse(t("app_card.feedback_footer_markdown")),
-          }}
-        />
-        <p className="mt-1 text-muted-foreground text-xs font-normal">
-          {t("app_card.copyright_footer")}
-        </p>
+        <div className="flex flex-col items-center justify-center text-center mt-2 gap-1">
+          <p
+            className="text-muted-foreground text-xs"
+            dangerouslySetInnerHTML={{
+              __html: marked.parse(t("app_card.feedback_footer_markdown")),
+            }}
+          />
+          <p className="text-muted-foreground text-xs font-normal">
+            {t("app_card.copyright_footer")}
+          </p>
+        </div>
       </CardFooter>
     </Card>
   );
