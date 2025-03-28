@@ -238,12 +238,19 @@ export function AppCard() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <CardHeader>
+      <CardHeader className="lg:mb-4">
         {isCalculator ? (
           <>
-            <CardTitle className="text-4xl">
-              {t("app_card.card_title")}
-            </CardTitle>
+            <div className="flex flex-row">
+              <img
+                className="size-10 lg:size-14 shrink-0 self-center"
+                src="/images/stellarjade.png"
+                alt="Stellar jade"
+              />
+              <CardTitle className="text-3xl lg:text-5xl title-text">
+                {t("app_card.card_title")}
+              </CardTitle>
+            </div>
             <CardDescription className="text-md">
               {t("app_card.card_description")}
             </CardDescription>
@@ -266,9 +273,7 @@ export function AppCard() {
             />
             {resultsVisible && (
               <div className="border shadow-md p-6 mt-12">
-                <h1 className="text-xl text-center">
-                  {t("app_card.results.title")}
-                </h1>
+                <h1 className="text-center">{t("app_card.results.title")}</h1>
                 <br />
                 <p>
                   {t("app_card.results.stellar_jades", {
@@ -347,7 +352,7 @@ export function AppCard() {
             <Accordion
               type="single"
               collapsible
-              className="w-full border p-4 my-4"
+              className="w-full border p-4 mb-4"
             >
               <AccordionItem value="item-1">
                 <AccordionTrigger>
@@ -394,7 +399,7 @@ export function AppCard() {
       <CardFooter className="flex flex-col items-center justify-center">
         {isCalculator ? (
           <div className="flex flex-col items-center justify-center mb-4 md:mx-16">
-            <h1 className="text-3xl mb-4">{t("app_card.assumptions")}</h1>
+            <h1 className="mb-4">{t("app_card.assumptions")}</h1>
             <ul className="list-disc list-inside text-sm">
               {(
                 t("app_card.assumption_array", {
@@ -424,9 +429,9 @@ export function AppCard() {
             __html: marked.parse(t("app_card.feedback_footer_markdown")),
           }}
         />
-        <div className="mt-1 text-muted-foreground text-xs">
+        <p className="mt-1 text-muted-foreground text-xs font-normal">
           {t("app_card.copyright_footer")}
-        </div>
+        </p>
       </CardFooter>
     </Card>
   );

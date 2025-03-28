@@ -375,7 +375,7 @@ export function CalculatorForm({
           />
           <div className="flex flex-col items-center justify-center gap-y-2">
             <Label>{t("calculator_form.label.endgame_content")}</Label>
-            <div className="grid grid-cols-1 md:grid-cols-3 border rounded-lg shadow-xs">
+            <div className="grid grid-cols-1 lg:grid-cols-3 border rounded-lg shadow-xs">
               <FormField
                 control={form.control}
                 name="memoryOfChaosStars"

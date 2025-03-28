@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -8,6 +10,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-title-shadow: var(--title-shadow);
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -89,13 +93,14 @@
 
 @layer utilities {
   body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Barlow, Arial, sans-serif;
   }
 }
 
 :root {
   --background: hsl(270 5% 25%);
   --foreground: hsl(224 71.4% 4.1%);
+  --title-shadow: hsl(10 95% 80%);
   --card: hsl(270 25% 95%);
   --card-foreground: hsl(224 71.4% 4.1%);
   --popover: hsl(220 15% 85%);
@@ -125,6 +130,7 @@
 .stellar-jades {
   --background: hsl(270 5% 25%);
   --foreground: hsl(224 71.4% 4.1%);
+  --title-shadow: hsl(10 95% 80%);
   --card: hsl(270 25% 95%);
   --card-foreground: hsl(224 71.4% 4.1%);
   --popover: hsl(220 15% 85%);
@@ -154,6 +160,7 @@
 .stellar-jades-dark {
   --background: hsl(270 0% 0%);
   --foreground: hsl(210 20% 98%);
+  --title-shadow: hsl(10 70% 65%);
   --card: hsl(270 6% 17%);
   --card-foreground: hsl(210 20% 98%);
   --popover: hsl(220 15% 85%);
@@ -183,11 +190,12 @@
 .night-time {
   --background: hsl(220 20% 10%);
   --foreground: hsl(210 20% 98%);
+  --title-shadow: hsl(215 35% 40%);
   --card: hsl(220 20% 20%);
   --card-foreground: hsl(210 20% 98%);
   --popover: hsl(220 20% 20%);
   --popover-foreground: hsl(210 20% 98%);
-  --primary: hsl(210 20% 5%);
+  --primary: hsl(215 35% 40%);
   --primary-foreground: hsl(210 20% 98%);
   --secondary: hsl(215 30% 30%);
   --secondary-foreground: hsl(210 20% 98%);
@@ -211,6 +219,7 @@
 .march-7th-preservation {
   --background: hsl(334 60% 70%);
   --foreground: hsl(224 71.4% 4.1%);
+  --title-shadow: hsl(200 39.4% 52.7%);
   --card: hsl(348 60% 85%);
   --card-foreground: hsl(224 71.4% 4.1%);
   --popover: hsl(348 60% 85%);
@@ -237,15 +246,16 @@
   --radius: 0.5rem;
 }
 .march-7th-hunt {
-  --background: hsl(185 32.7% 48%);
+  --background: hsl(358 82.7% 84.1%);
   --foreground: hsl(210 20% 98%);
-  --card: hsl(6 55% 50%);
+  --title-shadow: hsl(191 60% 50%);
+  --card: hsl(359 54.2% 30%);
   --card-foreground: hsl(210 20% 98%);
   --popover: hsl(210 20% 98%);
   --popover-foreground: hsl(224 71.4% 4.1%);
-  --primary: hsl(326 90% 65%);
+  --primary: hsl(355 5.5% 39.4%);
   --primary-foreground: hsl(210 20% 98%);
-  --secondary: hsl(45 71.9% 77.6%);
+  --secondary: hsl(58 96.6% 88.6%);
   --secondary-foreground: hsl(224 71.4% 4.1%);
   --muted: hsl(215 27.9% 16.9%);
   --muted-foreground: hsl(218 10% 65%);
@@ -267,12 +277,13 @@
 .evil-march {
   --background: hsl(210 70% 30%);
   --foreground: hsl(210 20% 98%);
+  --title-shadow: hsl(1 20% 11%);
   --card: hsl(320 90% 30%);
   --card-foreground: hsl(210 20% 98%);
   --popover: hsl(224 71.4% 4.1%);
   --popover-foreground: hsl(210 20% 98%);
-  --primary: hsl(210 20% 98%);
-  --primary-foreground: hsl(220.9 39.3% 11%);
+  --primary: hsl(0 100% 35%);
+  --primary-foreground: hsl(210 20% 98%);
   --secondary: hsl(1 20% 11%);
   --secondary-foreground: hsl(210 20% 98%);
   --muted: hsl(215 27.9% 16.9%);
@@ -303,4 +314,18 @@
   a {
     @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
   }
+  h1 {
+    @apply text-2xl font-semibold;
+  }
+}
+
+.title-text {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  text-shadow: var(--title-shadow) 0px 1px 0px, var(--title-shadow) 0px 2px 0px,
+    var(--title-shadow) 0px 3px 0px, var(--title-shadow) 0px 4px 0px,
+    var(--title-shadow) 0px 5px 0px, var(--title-shadow) 0px 6px 0px,
+    rgba(0, 0, 0, 0.2) 0px 5px 1px, rgba(0, 0, 0, 0.3) 0px 0px 10px,
+    rgba(0, 0, 0, 0.4) 0px 3px 5px, rgba(0, 0, 0, 0.5) 0px 6px 5px;
 }
