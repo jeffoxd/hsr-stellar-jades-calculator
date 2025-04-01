@@ -20,7 +20,7 @@ i18n
       backendOptions: [
         {
           expirationTime: 7 * 24 * 60 * 60 * 1000, // 7 days
-          versions: { en: "v0.9", "zh-Hans": "v0.9", "zh-Hant": "v0.9" },
+          versions: { en: "v0.91", "zh-Hans": "v0.91", "zh-Hant": "v0.91" },
         },
         {
           loadPath: "/locales/{{lng}}/translation.json",

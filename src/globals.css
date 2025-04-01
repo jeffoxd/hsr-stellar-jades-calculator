@@ -329,3 +329,7 @@
     rgba(0, 0, 0, 0.2) 0px 5px 1px, rgba(0, 0, 0, 0.3) 0px 0px 10px,
     rgba(0, 0, 0, 0.4) 0px 3px 5px, rgba(0, 0, 0, 0.5) 0px 6px 5px;
 }
+
+.round {
+  border-radius: 50%;
+}

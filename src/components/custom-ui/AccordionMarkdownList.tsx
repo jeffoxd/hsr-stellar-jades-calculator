@@ -21,11 +21,9 @@ export default function AccordionMarkdownList({
     <Accordion type="multiple">
       {value.map((item, i) => (
         <AccordionItem value={`item-${i + 1}`} key={i}>
-          <AccordionTrigger className="font-semibold">
-            {item.title}
-          </AccordionTrigger>
+          <AccordionTrigger>{item.title}</AccordionTrigger>
           <AccordionContent>
-            <div
+            <p
               className="prose-ul:list-disc prose-ul:list-inside"
               dangerouslySetInnerHTML={{
                 __html: marked.parse(item.content),

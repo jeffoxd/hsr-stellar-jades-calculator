@@ -2,6 +2,7 @@
   "common": {
     "about": "About",
     "back": "Back",
+    "next": "Next",
     "add": "Add",
     "acknowledge": "OK"
   },
@@ -66,8 +67,11 @@
   },
   "calculator_form": {
     "submit": "Calculate!",
-    "reset": "Reset",
+    "reset": "Restart",
+    "step_names": ["Initial", "P2W", "F2P", "Additional"],
     "label": {
+      "calculate_from": "Calculate from today",
+      "calculate_to": "to",
       "starting_stellar_jades": "Current stellar jades",
       "starting_limited_passes": "Current limited passes",
       "paid_stuffs": "Paid stuffs",
@@ -84,8 +88,7 @@
       "additional_sources": "Additional sources",
       "additional_sources_name": "Name",
       "additional_sources_jades": "Jades",
-      "additional_sources_passes": "Passes",
-      "end_date": "End date for calculations"
+      "additional_sources_passes": "Passes"
     },
     "select": {
       "point_rewards_equilibrium": "Equilibrium {{level}}",
@@ -104,7 +107,7 @@
       "point_rewards": "From Simulated/Divergent Universe (Equilibrium level affects amount given)",
       "embers_exchange_five_passes": "Assuming 5 exchanged every 1st of month when it refreshes (excluding this month)",
       "additional_sources": "Allows you to add any jade/pass sources custom-ly (like events, code redemption, compensations, HoYoLAB check-in, and more)",
-      "end_date": "Treat as exclusive, as today isn't counted"
+      "date": "Treat as exclusive, as today isn't counted"
     },
     "validation": {
       "valid_positive_number": "Please enter a positive number",

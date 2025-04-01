@@ -37,13 +37,13 @@ export default function SmartTooltip(
         </DialogTrigger>
         <DialogContent hideClose>
           <DialogHeader>
-            <DialogTitle className="font-normal text-balance">
+            <DialogTitle className="text-center font-normal text-balance">
               {props.children}
             </DialogTitle>
             <DialogDescription />
           </DialogHeader>
           <DialogFooter>
-            <DialogClose className="bg-primary text-primary-foreground h-10 rounded-xl">
+            <DialogClose className="w-full bg-primary text-primary-foreground h-10 rounded-xl">
               {t("common.acknowledge")}
             </DialogClose>
           </DialogFooter>

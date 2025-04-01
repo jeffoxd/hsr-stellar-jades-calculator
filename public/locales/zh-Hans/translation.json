@@ -2,6 +2,7 @@
   "common": {
     "about": "关于",
     "back": "后退",
+    "next": "下一步",
     "add": "添加",
     "acknowledge": "确定"
   },
@@ -66,8 +67,11 @@
   },
   "calculator_form": {
     "submit": "算吧!",
-    "reset": "重置",
+    "reset": "重新",
+    "step_names": ["起始", "氪金", "免费", "额外"],
     "label": {
+      "calculate_from": "从今日算起",
+      "calculate_to": "至",
       "starting_stellar_jades": "现有星琼",
       "starting_limited_passes": "现有星轨专票",
       "paid_stuffs": "付费的",
@@ -84,8 +88,7 @@
       "additional_sources": "额外收入",
       "additional_sources_name": "名称",
       "additional_sources_jades": "星琼",
-      "additional_sources_passes": "星轨专票",
-      "end_date": "结算日期"
+      "additional_sources_passes": "星轨专票"
     },
     "select": {
       "point_rewards_equilibrium": "均衡等级 {{level}}",
@@ -104,7 +107,7 @@
       "point_rewards": "来自模拟/差分宇宙 (均衡等级会影响奖励数量)",
       "embers_exchange_five_passes": "假定每月一日刷新时领取全五张 （除了本月）",
       "additional_sources": "让您添加任何额外星琼和星轨专票的收入（例如活动，兑换码，补偿，HoYoLAB签到等等）",
-      "end_date": "可以把这个日期当成被排除，不包括今日"
+      "date": "可以把这个日期当成被排除，不包括今日"
     },
     "validation": {
       "valid_positive_number": "请输入正数",

@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons"; // only radix-ui because i like their github icon
-import { Palette, Languages, BadgeInfo } from "lucide-react";
+import { Palette, Languages, BadgeInfo, X } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
 import { marked } from "marked";
+import { motion } from "motion/react";
 
 import { Themes, themes, useTheme } from "@/providers/ThemeProvider";
 import {
@@ -40,16 +41,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import AccordionMarkdownList from "./custom-ui/AccordionMarkdownList";
-import {
-  STELLAR_JADE_AMOUNTS,
-  LIMITED_PASS_AMOUNTS,
-  STELLAR_JADE_PER_PULL,
-} from "@/lib/constants";
+import AccordionMarkdownList from "@/components/custom-ui/AccordionMarkdownList";
+import { STELLAR_JADE_PER_PULL } from "@/lib/constants";
 import aboutAccordionText from "@/content/about.json";
 import { titleCaseText } from "@/lib/helper";
 import { CalculateResultsReturnType } from "@/lib/calculate";
 import { cn } from "@/lib/utils";
+import RewardTableAccordion from "@/components/RewardTableAccordion";
 
 export function AppCard() {
   const { i18n, t } = useTranslation();
@@ -58,6 +56,8 @@ export function AppCard() {
   const [isCalculator, setIsCalculator] = useState<boolean>(true);
   const [calculatorResults, setCalculatorResults] =
     useState<CalculateResultsReturnType | null>(null);
+  const [showCalculatorResults, setShowCalculatorResults] =
+    useState<boolean>(false);
 
   const calculationStepsTableRows = [
     {
@@ -128,62 +128,18 @@ export function AppCard() {
     },
   ];
 
-  const rewardTableRows = [
-    {
-      rewardName: t("hsr_terms.dailies"),
-      amountText: t("hsr_terms.amount_jades", {
-        amount: STELLAR_JADE_AMOUNTS.loginDaily,
-      }),
-    },
-    {
-      rewardName: t("hsr_terms.express_supply"),
-      amountText: t("hsr_terms.amount_jades", {
-        amount: STELLAR_JADE_AMOUNTS.expressSupplyPassDaily,
-      }),
-    },
-    {
-      rewardName: t("hsr_terms.nameless_glory"),
-      amountText: t("hsr_terms.amount_jades_passes", {
-        jadesAmount: STELLAR_JADE_AMOUNTS.namelessGlory,
-        passesAmount: LIMITED_PASS_AMOUNTS.namelessGlory,
-      }),
-    },
-    {
-      rewardName: t("hsr_terms.nameless_medal"),
-      amountText: t("hsr_terms.amount_jades_passes", {
-        jadesAmount: STELLAR_JADE_AMOUNTS.namelessMedal,
-        passesAmount: LIMITED_PASS_AMOUNTS.namelessMedal,
-      }),
-    },
-    {
-      rewardName: `${t("hsr_terms.weekly_point_rewards")} ${t(
-        "app_card.reward_table.weekly_point_rewards_extra"
-      )}`,
-      amountText: t("hsr_terms.amount_jades", {
-        amount: `[${STELLAR_JADE_AMOUNTS.pointRewards.toString()}]`,
-      }),
-    },
-    {
-      rewardName: t("app_card.reward_table.endgame_rewards"),
-      amountText: t("hsr_terms.amount_jades", {
-        amount: `[${STELLAR_JADE_AMOUNTS.memoryOfChaos.toString()}]`,
-      }),
-    },
-    {
-      rewardName: t("hsr_terms.monthly_ember_exchange"),
-      amountText: t("hsr_terms.amount_passes", {
-        amount: LIMITED_PASS_AMOUNTS.embersExchange,
-      }),
-    },
-  ];
-
-  const resultsVisible = calculatorResults != null;
+  const resultsVisible = calculatorResults != null && showCalculatorResults;
   const jadesPulls = Math.floor(
     calculatorResults?.stellarJades.total! / STELLAR_JADE_PER_PULL
   );
 
+  function onCalculatorResult(results: CalculateResultsReturnType) {
+    setShowCalculatorResults(true);
+    setCalculatorResults(results);
+  }
+
   return (
-    <Card className="flex flex-col items-center justify-center w-full md:w-4/6 2xl:w-1/2">
+    <Card className="flex flex-col items-center justify-center w-full md:w-5/6 lg:w-9/12 2xl:w-1/2">
       <div className="flex flex-row w-full justify-between">
         <Button
           variant="secondary"
@@ -268,13 +224,30 @@ export function AppCard() {
         <div className={cn("flex flex-col", { hidden: !isCalculator })}>
           <CalculatorForm
             className="flex flex-col items-center justify-center space-y-8"
-            onResult={(results) => {
-              setCalculatorResults(results);
-            }}
+            onResult={onCalculatorResult}
           />
           {resultsVisible && (
-            <div className="border shadow-md p-6 mt-12">
-              <h1 className="text-center">{t("app_card.results.title")}</h1>
+            <motion.div
+              initial={{
+                opacity: 0,
+              }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              className={cn("border shadow-md p-6 mt-12")}
+            >
+              <div className="flex flex-row items-center justify-between">
+                <h1 className="flex-1 text-center">
+                  {t("app_card.results.title")}
+                </h1>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowCalculatorResults(false)}
+                >
+                  <X />
+                </Button>
+              </div>
               <br />
               <p>
                 {t("app_card.results.stellar_jades", {
@@ -327,7 +300,7 @@ export function AppCard() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-              <Separator decorative className="bg-black my-4" />
+              <Separator decorative className="my-4" />
               <p>
                 <Trans
                   t={t}
@@ -345,43 +318,11 @@ export function AppCard() {
                   }}
                 />
               </p>
-            </div>
+            </motion.div>
           )}
         </div>
         <div className={cn("flex, flex-col", { hidden: isCalculator })}>
-          <Accordion
-            type="single"
-            collapsible
-            className="w-full border p-4 mb-4"
-          >
-            <AccordionItem value="item-1">
-              <AccordionTrigger>
-                {t("app_card.reward_table.title")}
-              </AccordionTrigger>
-              <AccordionContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="min-w-32">
-                        {t("app_card.reward_table.rewards_column")}
-                      </TableHead>
-                      <TableHead>
-                        {t("app_card.reward_table.amount_column")}
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {rewardTableRows.map(({ rewardName, amountText }, i) => (
-                      <TableRow key={i}>
-                        <TableCell>{rewardName}</TableCell>
-                        <TableCell>{amountText}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+          <RewardTableAccordion />
           {i18n.language !== "en" && (
             <Alert>
               <BadgeInfo className="h-4 w-4" />
@@ -395,24 +336,32 @@ export function AppCard() {
         </div>
       </CardContent>
       {isCalculator && <Separator decorative className="my-4" />}
-      <CardFooter className="flex flex-col items-center justify-center">
-        {isCalculator ? (
-          <div className="flex flex-col items-center justify-center mb-4 md:mx-16">
-            <h1 className="mb-4">{t("app_card.assumptions")}</h1>
-            <ul className="list-disc list-inside text-sm">
-              {(
-                t("app_card.assumption_array", {
-                  returnObjects: true,
-                }) as string[]
-              ).map((e, i) => (
-                <li key={i}>{e}</li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <></>
+      <CardFooter className="w-full flex flex-col gap-2">
+        {isCalculator && (
+          <Accordion
+            type="single"
+            collapsible
+            className="border p-4 w-full mb-4"
+          >
+            <AccordionItem value="item-1">
+              <AccordionTrigger>{t("app_card.assumptions")}</AccordionTrigger>
+              <AccordionContent>
+                {/* <div className="flex flex-col items-center justify-center mb-4 md:mx-16">
+                  <h1 className="mb-4">{t("app_card.assumptions")}</h1> */}
+                <ul className="list-disc list-inside text-sm">
+                  {(
+                    t("app_card.assumption_array", {
+                      returnObjects: true,
+                    }) as string[]
+                  ).map((e, i) => (
+                    <li key={i}>{e}</li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         )}
-        <div className="mt-2">
+        <div className="">
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -422,7 +371,7 @@ export function AppCard() {
             <GitHubLogoIcon width="30" height="30" />
           </a>
         </div>
-        <div className="flex flex-col items-center justify-center text-center mt-2 gap-1">
+        <div className="flex flex-col items-center justify-center text-center">
           <p
             className="text-muted-foreground text-xs"
             dangerouslySetInnerHTML={{
