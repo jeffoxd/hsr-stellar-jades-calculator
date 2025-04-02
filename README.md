@@ -14,16 +14,16 @@ Built using [React](https://react.dev/) via [Vite](https://vite.dev/) on [Typesc
 
 ## Features
 
-- Several configurations for all known sources of stellar jades and limited passes
+- Form steps to configure for all known sources of stellar jades and limited passes
 - Customisable dynamic unlimited section to add all extra sources of jades and passes, mainly for events, gifts/redeemable code, compensation etc. And to be more future proof when website stops being maintained
+- Responsive design (mobile-friendly) as priority
 - Many themes (because why not?)
 - Localisation
-- Mobile-friendly
 - Remembers last session (theme, language, unsubmitted form state)
 
 ## Showcase
 
-Main form (remembers unsubmitted data)
+Main form with form stepper to show form filling progress
 
 ![Main form](docs/images/main_form.png)
 
@@ -31,7 +31,11 @@ Custom amount to add in form
 
 ![Additional sources](docs/images/additional_sources.png)
 
-Mobile-friendly tooltip (detects if device is touch and switches if it is)
+Mobile-friendly UI (bottom sticky buttons and minimalist progress bar)
+
+![Mobile UI](docs/images/mobile_ui.png)
+
+Touch-friendly tooltip (since hovering tooltip doesn't work on touch devices)
 
 ![Mobile tooltip](docs/images/mobile_tooltip.png)
 
@@ -89,7 +93,7 @@ Inspired by this [HSR Free Stellar Jade Calculator](https://github.com/Kronman59
 
 ### Special thanks
 
-- Thanks to [@cinnakoko](https://github.com/cinnakoko) for theme inspiration and testing~
+- [@cinnakoko](https://github.com/cinnakoko) for theme inspiration and testing~
 
 #### Translations
 
