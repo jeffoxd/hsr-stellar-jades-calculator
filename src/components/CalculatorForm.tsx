@@ -269,12 +269,12 @@ export function CalculatorForm({
             stepNames={STEP_NAMES}
             goTo={goTo}
           />
-          <div className="md:min-h-[26rem] lg:min-h-[20rem] flex items-center justify-center">
+          <div className="md:min-h-[18rem] flex px-6">
             <FormStepWrapper
               mobileStepName={STEP_NAMES[0]}
               current={currentStep === 0}
               stepDirection={stepDirection}
-              className="flex flex-col gap-8"
+              className="flex flex-col gap-8 md:pt-8"
             >
               <FormField
                 control={form.control}
@@ -311,23 +311,41 @@ export function CalculatorForm({
               mobileStepName={STEP_NAMES[1]}
               current={currentStep === 1}
               stepDirection={stepDirection}
+              className="flex flex-col gap-4 md:gap-8 pt-8 md:pt-12"
             >
-              <Label>{t("calculator_form.label.paid_stuffs")}</Label>
-              <div className="border rounded-xl p-4 pt-2 shadow-xs">
+              <FormField
+                control={form.control}
+                name="expressSupplyPass"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start gap-x-2 px-4">
+                    <FormLabel>
+                      <p className="float-left pr-1">
+                        {t("calculator_form.label.express_supply_pass")}
+                      </p>
+                      <SmartTooltip>
+                        {t("calculator_form.tooltip.express_supply_pass", {
+                          amount: STELLAR_JADE_AMOUNTS.expressSupplyPassDaily,
+                        })}
+                      </SmartTooltip>
+                    </FormLabel>
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="border rounded-xl p-4 flex flex-col gap-4">
                 <FormField
                   control={form.control}
-                  name="expressSupplyPass"
+                  name="paidBattlePass"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-2 space-y-0 p-4">
+                    <FormItem className="flex items-start space-x-2 space-y-0 ">
                       <FormLabel>
-                        <p className="float-left pr-1">
-                          {t("calculator_form.label.express_supply_pass")}
-                        </p>
-                        <SmartTooltip>
-                          {t("calculator_form.tooltip.express_supply_pass", {
-                            amount: STELLAR_JADE_AMOUNTS.expressSupplyPassDaily,
-                          })}
-                        </SmartTooltip>
+                        {t("calculator_form.label.battle_pass")}
                       </FormLabel>
                       <FormControl>
                         <Checkbox
@@ -339,71 +357,51 @@ export function CalculatorForm({
                     </FormItem>
                   )}
                 />
-                <div className="border rounded-xl">
-                  <FormField
-                    control={form.control}
-                    name="paidBattlePass"
-                    render={({ field }) => (
-                      <FormItem className="flex items-start space-x-2 space-y-0 p-4">
-                        <FormLabel>
-                          {t("calculator_form.label.battle_pass")}
-                        </FormLabel>
+                <FormField
+                  control={form.control}
+                  name="battlePassType"
+                  render={({ field }) => (
+                    <FormItem className="flex items-start space-x-2 space-y-0">
+                      <FormLabel className="flex">
+                        <p className="float-left flex-1">
+                          {t("calculator_form.label.battle_pass_type")}
+                        </p>
+                        <SmartTooltip>
+                          {t("calculator_form.tooltip.battle_pass_type", {
+                            namelessGloryJades:
+                              STELLAR_JADE_AMOUNTS.namelessGlory,
+                            namelessMedalJades:
+                              STELLAR_JADE_AMOUNTS.namelessMedal,
+                            limitedPass: LIMITED_PASS_AMOUNTS.namelessGlory,
+                          })}
+                        </SmartTooltip>
+                      </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
                         <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
+                          <SelectTrigger>
+                            <SelectValue
+                              placeholder={t(
+                                "calculator_form.placeholder.battle_pass_type"
+                              )}
+                            />
+                          </SelectTrigger>
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="battlePassType"
-                    render={({ field }) => (
-                      <FormItem className="flex items-start space-x-2 space-y-0 p-4">
-                        <FormLabel className="flex">
-                          <p className="float-left flex-1">
-                            {t("calculator_form.label.battle_pass_type")}
-                          </p>
-                          <SmartTooltip>
-                            {t("calculator_form.tooltip.battle_pass_type", {
-                              namelessGloryJades:
-                                STELLAR_JADE_AMOUNTS.namelessGlory,
-                              namelessMedalJades:
-                                STELLAR_JADE_AMOUNTS.namelessMedal,
-                              limitedPass: LIMITED_PASS_AMOUNTS.namelessGlory,
-                            })}
-                          </SmartTooltip>
-                        </FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue
-                                placeholder={t(
-                                  "calculator_form.placeholder.battle_pass_type"
-                                )}
-                              />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="0">
-                              {t("hsr_terms.nameless_glory")}
-                            </SelectItem>
-                            <SelectItem value="1">
-                              {t("hsr_terms.nameless_medal")}
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                        <SelectContent>
+                          <SelectItem value="0">
+                            {t("hsr_terms.nameless_glory")}
+                          </SelectItem>
+                          <SelectItem value="1">
+                            {t("hsr_terms.nameless_medal")}
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             </FormStepWrapper>
             <FormStepWrapper
@@ -412,12 +410,12 @@ export function CalculatorForm({
               stepDirection={stepDirection}
               className="flex flex-col items-center justify-center gap-4"
             >
-              <div className="border">
+              <div className="border p-4 flex flex-col gap-4">
                 <FormField
                   control={form.control}
                   name="pointRewards"
                   render={({ field }) => (
-                    <FormItem className="flex items-start space-x-2 space-y-0 p-4">
+                    <FormItem className="flex items-start space-x-2 space-y-0">
                       <FormLabel>
                         <p className="float-left pr-1">
                           {t("calculator_form.label.point_rewards")}
@@ -440,7 +438,7 @@ export function CalculatorForm({
                   control={form.control}
                   name="pointRewardsEquilibrium"
                   render={({ field }) => (
-                    <FormItem className="flex items-start space-x-2 space-y-0 p-4">
+                    <FormItem className="flex items-start space-x-2 space-y-0">
                       <FormLabel>
                         {t("calculator_form.label.point_rewards_equilibrium")}
                       </FormLabel>
@@ -500,12 +498,12 @@ export function CalculatorForm({
               />
               <div className="flex flex-col items-center justify-center gap-y-2">
                 <Label>{t("calculator_form.label.endgame_content")}</Label>
-                <div className="grid grid-cols-1 lg:grid-cols-3 border rounded-lg shadow-xs">
+                <div className="grid grid-cols-1 lg:grid-cols-3 border p-4 gap-4 rounded-lg shadow-xs">
                   <FormField
                     control={form.control}
                     name="memoryOfChaosStars"
                     render={({ field }) => (
-                      <FormItem className="flex items-start space-x-2 space-y-0 p-4">
+                      <FormItem className="flex items-start space-x-2 space-y-0">
                         <FormLabel>
                           {t("calculator_form.label.memory_of_chaos_stars")}
                         </FormLabel>
@@ -540,7 +538,7 @@ export function CalculatorForm({
                     control={form.control}
                     name="pureFictionStars"
                     render={({ field }) => (
-                      <FormItem className="flex items-start space-x-2 space-y-0 p-4">
+                      <FormItem className="flex items-start space-x-2 space-y-0">
                         <FormLabel>
                           {t("calculator_form.label.pure_fiction_stars")}
                         </FormLabel>
@@ -575,7 +573,7 @@ export function CalculatorForm({
                     control={form.control}
                     name="apocalypticShadowStars"
                     render={({ field }) => (
-                      <FormItem className="flex items-start space-x-2 space-y-0 p-4">
+                      <FormItem className="flex items-start space-x-2 space-y-0">
                         <FormLabel>
                           {t("calculator_form.label.apocalyptic_shadow_stars")}
                         </FormLabel>
