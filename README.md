@@ -4,7 +4,7 @@
 
 Lower-bound pulls estimation from today to end date for the hit game [Honkai: Star Rail](https://hsr.hoyoverse.com/)~
 
-![Title](docs/images/hero.png)
+![Hero](docs/images/hero.png)
 
 Built using [React](https://react.dev/) via [Vite](https://vite.dev/) on [Typescript](https://www.typescriptlang.org/), big help from [shadcn/ui](https://ui.shadcn.com/)!
 
@@ -25,43 +25,43 @@ Built using [React](https://react.dev/) via [Vite](https://vite.dev/) on [Typesc
 
 Main form with form stepper to show form filling progress
 
-![Main form](docs/images/main_form.png)
+<img src="docs/images/main_form.png" width="640">
 
 Custom amount to add in form
 
-![Additional sources](docs/images/additional_sources.png)
+<img src="docs/images/additional_sources.png" width="640">
 
 Mobile-friendly UI (bottom sticky buttons and minimalist progress bar)
 
-![Mobile UI](docs/images/mobile_ui.png)
+<img src="docs/images/mobile_ui.png" width="320">
 
 Touch-friendly tooltip (since hovering tooltip doesn't work on touch devices)
 
-![Mobile tooltip](docs/images/mobile_tooltip.png)
+<img src="docs/images/mobile_tooltip.png" width="320">
 
 Detailed results with calculation steps
 
-![Results](docs/images/results.png)
+<img src="docs/images/results.png" width="640">
 
 Reward table of the game, for the curious ones
 
-![Reward table](docs/images/reward_table.png)
+<img src="docs/images/reward_table.png" width="640">
 
 Supports multiple languages (remembers last set language)
 
-![Localisation](docs/images/localisation.png)
+<img src="docs/images/localisation.png" width="320">
 
 Allows users to switch between themes (remembers last set theme)
 
-![Theme selector](docs/images/theme_selector.png)
+<img src="docs/images/theme_selector.png" width="320">
 
 Night Time theme
 
-![Night Time theme](docs/images/main_form_nighttime.png)
+<img src="docs/images/main_form_nighttime.png" width="640">
 
 Just my fav theme from my fav character <3
 
-![March 7th Preservation theme](docs/images/main_form_m7pres.png)
+<img src="docs/images/main_form_m7pres.png" width="640">
 
 ## Running locally
 
