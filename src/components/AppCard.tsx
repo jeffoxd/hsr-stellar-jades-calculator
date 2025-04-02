@@ -233,7 +233,7 @@ export function AppCard() {
               }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, ease: "easeInOut" }}
-              className={cn("border shadow-md p-6 mt-12")}
+              className={cn("border shadow-md p-6 mx-2 md:mx-6 mt-12")}
             >
               <div className="flex flex-row items-center justify-between">
                 <h1 className="flex-1 text-center">
