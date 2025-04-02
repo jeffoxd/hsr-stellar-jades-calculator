@@ -9,7 +9,7 @@ export default function App() {
       <TouchProvider>
         <ThemeProvider>
           <main>
-            <div className="flex flex-col py-16 items-center justify-center">
+            <div className="flex flex-col md:py-12 lg:py-16 items-center justify-center">
               <AppCard />
             </div>
           </main>

@@ -50,7 +50,7 @@ const CardContent = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("p-6 pt-0", className)} {...props} />
+  <div className={cn("pb-6 pt-0", className)} {...props} />
 );
 CardContent.displayName = "CardContent";
 

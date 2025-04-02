@@ -143,7 +143,7 @@ export function AppCard() {
       <div className="flex flex-row w-full justify-between">
         <Button
           variant="secondary"
-          className="mt-2 ml-2"
+          className="mt-2 ml-2 text-sm"
           onClick={() => setIsCalculator((e) => !e)}
         >
           {isCalculator ? t("common.about") : t("common.back")}
@@ -214,7 +214,7 @@ export function AppCard() {
           </>
         ) : (
           <>
-            <CardTitle className="text-4xl">
+            <CardTitle className="text-3xl md:text-4xl">
               {t("app_card.about_title")}
             </CardTitle>
           </>
