@@ -12,7 +12,7 @@ i18n
   .init({
     load: "currentOnly",
     supportedLngs: ["en", "zh-Hans", "zh-Hant"],
-    debug: true,
+    debug: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
     fallbackLng: "en",
     detection: { order: ["localStorage", "navigator"] },
     backend: {

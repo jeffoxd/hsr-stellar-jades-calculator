@@ -143,7 +143,7 @@ export function AppCard() {
       <div className="flex flex-row w-full justify-between">
         <Button
           variant="secondary"
-          className="mt-2 ml-2 text-sm"
+          className="mt-2 ml-2"
           onClick={() => setIsCalculator((e) => !e)}
         >
           {isCalculator ? t("common.about") : t("common.back")}
@@ -321,7 +321,9 @@ export function AppCard() {
             </motion.div>
           )}
         </div>
-        <div className={cn("flex, flex-col", { hidden: isCalculator })}>
+        <div
+          className={cn("flex, flex-col p-6 lg:p-8", { hidden: isCalculator })}
+        >
           <RewardTableAccordion />
           {i18n.language !== "en" && (
             <Alert>
