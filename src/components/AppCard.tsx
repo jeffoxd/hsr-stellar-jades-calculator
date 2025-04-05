@@ -148,52 +148,54 @@ export function AppCard() {
         >
           {isCalculator ? t("common.about") : t("common.back")}
         </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" className="mt-2 mr-2">
-              <Palette />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-48">
-            <DropdownMenuRadioGroup
-              value={theme}
-              onValueChange={(value) => setTheme(value as Themes)}
-            >
-              {themes.map((e, i) => (
-                <DropdownMenuRadioItem value={e} key={i}>
-                  {titleCaseText(e.replace(/-/g, " "))}
+        <div className="flex flex-row md:flex-col">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" className="mt-2 mr-2">
+                <Palette />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-48">
+              <DropdownMenuRadioGroup
+                value={theme}
+                onValueChange={(value) => setTheme(value as Themes)}
+              >
+                {themes.map((e, i) => (
+                  <DropdownMenuRadioItem value={e} key={i}>
+                    {titleCaseText(e.replace(/-/g, " "))}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" className="float-right mt-2 mr-2">
+                <Languages />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-48">
+              <DropdownMenuRadioGroup
+                value={i18n.language}
+                onValueChange={(value) => {
+                  i18n.changeLanguage(value, (err, t) => {
+                    if (err) return console.error("Oops! i18n error", err);
+                  });
+                }}
+              >
+                <DropdownMenuRadioItem value="en">
+                  English
                 </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      <div className="w-full justify-between">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" className="float-right mt-2 mr-2">
-              <Languages />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-48">
-            <DropdownMenuRadioGroup
-              value={i18n.language}
-              onValueChange={(value) => {
-                i18n.changeLanguage(value, (err, t) => {
-                  if (err) return console.error("Oops! i18n error", err);
-                });
-              }}
-            >
-              <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="zh-Hans">
-                简体中文
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="zh-Hant">
-                繁體中文
-              </DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                <DropdownMenuRadioItem value="zh-Hans">
+                  简体中文
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="zh-Hant">
+                  繁體中文
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <CardHeader className="lg:mb-4">
         {isCalculator ? (
@@ -204,11 +206,11 @@ export function AppCard() {
                 src="/images/stellarjade.png"
                 alt="Stellar jade"
               />
-              <CardTitle className="text-3xl lg:text-5xl title-text">
+              <CardTitle className="text-2xl lg:text-5xl title-text">
                 {t("app_card.card_title")}
               </CardTitle>
             </div>
-            <CardDescription className="text-md">
+            <CardDescription className="text-center md:text-left md:text-md">
               {t("app_card.card_description")}
             </CardDescription>
           </>

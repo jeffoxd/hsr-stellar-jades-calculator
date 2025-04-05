@@ -202,7 +202,7 @@ export function CalculatorForm({
         className={className}
         {...props}
       >
-        <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 lg:gap-x-8 gap-y-2 md:gap-y-4">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 lg:gap-x-8 gap-y-1 md:gap-y-4">
           <div className="flex flex-row items-center justify-center gap-2 md:gap-8">
             <Label>{t("calculator_form.label.calculate_from")}</Label>
             <span>
