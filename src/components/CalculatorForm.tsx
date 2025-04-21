@@ -147,7 +147,6 @@ export function CalculatorForm({
     next();
 
     if (isLastStep) {
-      localStorage.removeItem(FORM_DATA_KEY);
       const parsedConfigurations = parseConfigurations(values);
       const results = calculateResults(parsedConfigurations);
       onResult(results);
