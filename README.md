@@ -8,7 +8,7 @@ Lower-bound pulls estimation from today to end date for the hit game [Honkai: St
 
 Built using [React](https://react.dev/) via [Vite](https://vite.dev/) on [Typescript](https://www.typescriptlang.org/), big help from [shadcn/ui](https://ui.shadcn.com/)!
 
-[i18next](https://www.i18next.com/) for localisation, [Tailwind CSS](https://tailwindcss.com/) for theming (using own Theme Provider)
+[i18next](https://www.i18next.com/) for localisation, [Tailwind CSS](https://tailwindcss.com/) for theming (using own Theme Provider), and [Motion](https://motion.dev/) for animations
 
 </div>
 
