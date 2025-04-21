@@ -623,7 +623,7 @@ export function CalculatorForm({
           <div className="hidden md:flex flex-row items-center justify-center w-1/2 gap-4">
             {formButtons()}
           </div>
-          <div className="md:hidden border-t flex flex-col items-center justify-center fixed bottom-0 w-full bg-card">
+          <div className="md:hidden border-t flex flex-col items-center justify-center fixed bottom-0 z-50 w-full bg-card">
             <Progress
               value={(currentStep / (steps - 1)) * 100}
               className="rounded-none"
